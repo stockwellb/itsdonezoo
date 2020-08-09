@@ -1,0 +1,32 @@
+{
+  "name": "itsdonezoo",
+  "version": "1.0.0",
+  "description": "Manage todo lists",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "dev-server": "webpack-dev-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stockwellb/itsdonezoo.git"
+  },
+  "keywords": [
+    "todo",
+    "list"
+  ],
+  "author": "Bruce Stockwell",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stockwellb/itsdonezoo/issues"
+  },
+  "homepage": "https://github.com/stockwellb/itsdonezoo#readme",
+  "devDependencies": {
+    "css-loader": "^4.2.1",
+    "style-loader": "^1.2.1",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  }
+}

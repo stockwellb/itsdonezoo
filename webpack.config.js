@@ -7,6 +7,7 @@ module.exports = {
     path: __dirname + "/build",
     filename: "bundle.js",
   },
+  devtool: "cheap-module-eval-source-map",
   devServer: {
     contentBase: path.join(__dirname, "build"),
   },
@@ -16,7 +17,16 @@ module.exports = {
         test: /\.css$/,
         use: ["style-loader", "css-loader"],
       },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env"],
+          },
+        },
+      },
     ],
   },
-  devtool: "cheap-module-eval-source-map",
 };

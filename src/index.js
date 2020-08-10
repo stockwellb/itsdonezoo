@@ -12,6 +12,7 @@ const patch = init([
   styleModule,
   eventListenersModule,
 ]);
+
 const container = document.getElementById("root");
-const vnode = h("div", { style: { fontWeight: "bold" } }, "Hello World");
+const vnode = h("div", { style: { fontWeight: "bold" } }, process.env.GREETING);
 patch(container, vnode);

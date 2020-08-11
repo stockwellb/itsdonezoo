@@ -1,9 +1,9 @@
 import Snabbdom from "snabbdom-pragma";
-import Home from "./screens/Home";
-import About from "./screens/About";
-import Profile from "./screens/Profile";
-import Lists from "./screens/Lists";
-import List from "./screens/List";
+import Home from "../screens/Home";
+import About from "../screens/About";
+import Profile from "../screens/Profile";
+import Lists from "../screens/Lists";
+import List from "../screens/List";
 
 export const routes = {
   "/": (state) => <Home />,

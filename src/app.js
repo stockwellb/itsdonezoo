@@ -1,9 +1,10 @@
 import Snabbdom from "snabbdom-pragma";
 
-export default ({ contentId }, children) => (
-  <div>
-    <h1 style={{ fontWeight: "bold" }}>{process.env.GREETING}</h1>
+export default ({}, children) => (
+  <section>
     <div>{children}</div>
-    <div id={contentId}></div>
-  </div>
+    <h1>{process.env.APP_TITLE}</h1>
+    <p>{process.env.APP_CAPTION}</p>
+    <div id="content"></div>
+  </section>
 );

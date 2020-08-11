@@ -1,11 +1,14 @@
 import Snabbdom from "snabbdom-pragma";
 
-const handleClick = (e) => alert(process.env.GREETING);
+const handleClick = (e) => alert("Thank you I needed that.");
 export default () => (
-  <div id="content">
-    <div>this is home</div>
+  <section id="content">
+    <div>
+      Maybe some dashboard stuff could go here. Total number of lists, total
+      number of uncompleted items or uncompleted lists. Whatever.
+    </div>
     <button type="button" on-click={handleClick}>
-      Hey
+      Click me
     </button>
-  </div>
+  </section>
 );

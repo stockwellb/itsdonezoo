@@ -1,5 +1,5 @@
 import Snabbdom from "snabbdom-pragma";
 
-export default ({ itemId }) => (
-  <p id="content">this is profile {`${itemId}`}</p>
+export default () => (
+  <section id="content">Some stuff about you should go here.</section>
 );

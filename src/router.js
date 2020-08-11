@@ -4,7 +4,7 @@ import { patch } from "./vdom";
 export default (id) => {
   console.log("Router init");
 
-  const getVnode = (path) => routes[path] || routes["/"];
+  const getVnode = (path) => routes[path] || routes["/#"];
 
   const renderPath = (path) => {
     console.log("Rendering path: ", path);
@@ -15,12 +15,12 @@ export default (id) => {
   };
 
   document.addEventListener("DOMContentLoaded", (event) => {
-    console.log("DOM Ready", window.location.pathname);
-    renderPath(window.location.pathname);
+    console.log("DOM Ready", window.location.hash);
+    renderPath(window.location.hash);
   });
 
   window.onpopstate = () => {
-    console.log("Popstate", window.location.pathname);
-    renderPath(window.location.pathname);
+    console.log("Popstate", window.location.hash);
+    renderPath(window.location.hash);
   };
 };

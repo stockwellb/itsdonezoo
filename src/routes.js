@@ -4,7 +4,7 @@ import About from "./screens/About";
 import Profile from "./screens/Profile";
 
 export const routes = {
-  "/": <Home />,
-  "/about": <About />,
-  "/profile": <Profile />,
+  "/#": <Home />,
+  "#/about": <About />,
+  "#/profile": <Profile />,
 };

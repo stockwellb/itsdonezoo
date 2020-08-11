@@ -1,5 +1,5 @@
-import "./index.css";
 import Snabbdom from "snabbdom-pragma";
+import "./index.css";
 import { patch } from "./modules/vdom";
 import App from "./App";
 import Nav from "./components/Nav";

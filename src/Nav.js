@@ -1,8 +1,5 @@
 import Snabbdom from "snabbdom-pragma";
-
-const handleNavigate = (path) => (e) => {
-  window.history.pushState({}, path, window.location.origin + path);
-};
+import { handleNavigate } from "./lib";
 
 export default ({}, children) => (
   <ul>

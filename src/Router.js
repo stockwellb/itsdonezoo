@@ -1,17 +1,17 @@
 import Snabbdom from "snabbdom-pragma";
 import { patch } from "./dom";
 
-const home = <div>this is home</div>;
-const about = <div>this is about</div>;
-const profile = <div>this is profile</div>;
+import Home from "./screens/Home";
+import About from "./screens/About";
+import Profile from "./screens/Profile";
 
 const routes = {
-  "/": home,
-  "/about": about,
-  "/profile": profile,
+  "/": <Home />,
+  "/about": <About />,
+  "/profile": <Profile />,
 };
 
-const getRoute = (path) => routes[path] || home;
+const getRoute = (path) => routes[path] || <Home />;
 
 const vnode = getRoute(window.location.pathname);
 

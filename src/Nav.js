@@ -1,5 +1,5 @@
 import Snabbdom from "snabbdom-pragma";
-import { handleNavigate } from "./lib";
+import { handleNavigate } from "./Router";
 
 export default ({}, children) => (
   <ul>

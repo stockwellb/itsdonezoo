@@ -1,27 +1,23 @@
 import Snabbdom from "snabbdom-pragma";
-import { patch } from "./dom";
+import { patch } from "./vdom";
 
-import Home from "./screens/Home";
-import About from "./screens/About";
-import Profile from "./screens/Profile";
-
-const routes = {
-  "/": <Home />,
-  "/about": <About />,
-  "/profile": <Profile />,
+export const handleNavigate = (path) => (e) => {
+  window.history.pushState({}, path, window.location.origin + path);
 };
 
-const getRoute = (path) => routes[path] || <Home />;
+export default ({ routes }) => {
+  console.log("Router init");
+  const getRoute = (path) => routes[path] || routes["/"];
 
-const vnode = getRoute(window.location.pathname);
+  document.addEventListener("DOMContentLoaded", (event) => {
+    renderPath(window.location.pathname);
+  });
 
-window.onpopstate = () => {
-  patch(vnode, getRoute(window.location.pathname));
+  const renderPath = (path) => {
+    const element = document.getElementById("router");
+    const vnode = getRoute(path);
+    patch(element, vnode);
+  };
+  window.onpopstate = () => renderPath(window.location.pathname);
+  return null;
 };
-
-export default ({}, children) => (
-  <div>
-    <div>{children}</div>
-    {vnode}
-  </div>
-);

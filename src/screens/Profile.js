@@ -1,3 +1,3 @@
 import Snabbdom from "snabbdom-pragma";
 
-export default () => <div>this is profile</div>;
+export default () => <p id="content">this is profile</p>;

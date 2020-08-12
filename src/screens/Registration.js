@@ -2,7 +2,7 @@ import Snabbdom from "snabbdom-pragma";
 
 export default () => (
   <section id="content">
-    <h2>Login</h2>
+    <h2>Registration</h2>
     <form>
       <div style={{ display: "table" }}>
         <div style={{ display: "table-row" }}>
@@ -31,9 +31,9 @@ export default () => (
             type="password"
           ></input>
         </div>
-        <button type="submit">Login</button>
+        <button type="submit">Register</button>
       </div>
     </form>
-    <a href="/#/forgot-password">forgot password</a>
+    <a href="/#/login">login</a>
   </section>
 );

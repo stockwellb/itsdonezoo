@@ -2,7 +2,9 @@ import Snabbdom from "snabbdom-pragma";
 import { login } from "../modules/api";
 
 const handleLogin = () => {
-  return login("", "");
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  return login(email, password);
 };
 
 export default () => (

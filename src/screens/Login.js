@@ -1,4 +1,9 @@
 import Snabbdom from "snabbdom-pragma";
+import { login } from "../modules/api";
+
+const handleLogin = () => {
+  return login("", "");
+};
 
 export default () => (
   <section id="content">
@@ -8,13 +13,13 @@ export default () => (
         <div style={{ display: "table-row" }}>
           <label
             style={{ display: "table-cell", marginBottom: "10px" }}
-            for="username"
+            for="email"
           >
-            Username
+            Email
           </label>
           <input
             style={{ display: "table-cell", marginBottom: "10px" }}
-            id="username"
+            id="email"
             type="text"
           ></input>
         </div>
@@ -31,7 +36,9 @@ export default () => (
             type="password"
           ></input>
         </div>
-        <button type="submit">Login</button>
+        <button type="button" on-click={handleLogin}>
+          Login
+        </button>
       </div>
     </form>
     <a href="/#/forgot-password">forgot password</a>

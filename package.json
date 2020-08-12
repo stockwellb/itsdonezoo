@@ -47,6 +47,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "firebase": "^7.17.2",
     "query-string": "^6.13.1",
     "snabbdom": "^1.0.1"
   }

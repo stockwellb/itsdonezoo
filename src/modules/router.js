@@ -15,20 +15,20 @@ export default (id) => {
   };
 
   const parseHash = (hash) => {
-    const [url, params] = hash.split("?");
+    const [url, query] = hash.split("?");
     const path = url.replace(/^#\/?|\/$/g, "").split("/");
-    const state = queryString.parse(params || "");
-    console.info("path", path, state, hash);
-    return { path, state };
+    const params = queryString.parse(query || "");
+    console.info("path", path, params, hash);
+    return { path, params };
   };
 
   document.addEventListener("DOMContentLoaded", (event) => {
-    const { path, state } = parseHash(location.hash);
-    render(path, state);
+    const { path, params } = parseHash(location.hash);
+    render(path, params);
   });
 
   onpopstate = () => {
-    const { path, state } = parseHash(location.hash);
-    render(path, state);
+    const { path, params } = parseHash(location.hash);
+    render(path, params);
   };
 };

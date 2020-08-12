@@ -10,13 +10,13 @@ import ChangePassword from "../screens/ChangePassword";
 import ForgotPassword from "../screens/ForgotPassword";
 
 export const routes = {
-  dashboard: (state) => <Dashboard {...state} />,
-  about: (state) => <About {...state} />,
-  profile: (state) => <Profile {...state} />,
-  lists: (state) => <Lists />,
-  list: (state) => <List {...state} />,
-  login: (state) => <Login {...state} />,
-  "change-password": (state) => <ChangePassword {...state} />,
-  "forgot-password": (state) => <ForgotPassword {...state} />,
-  registration: (state) => <Registration {...state} />,
+  dashboard: (params) => <Dashboard {...params} />,
+  about: (params) => <About {...params} />,
+  profile: (params) => <Profile {...params} />,
+  lists: (params) => <Lists {...params} />,
+  list: (params) => <List {...params} />,
+  login: (params) => <Login {...params} />,
+  "change-password": (params) => <ChangePassword {...params} />,
+  "forgot-password": (params) => <ForgotPassword {...params} />,
+  registration: (params) => <Registration {...params} />,
 };

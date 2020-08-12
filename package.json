@@ -5,7 +5,9 @@
   "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
+    "build:dev": "env-cmd -f .env.development webpack",
+    "build:test": "env-cmd -f .env.test webpack",
+    "build:prod": "env-cmd -f .env.production webpack",
     "start:dev": "env-cmd -f .env.development webpack-dev-server",
     "start:test": "env-cmd -f .env.test webpack-dev-server",
     "start:prod": "env-cmd -f .env.production webpack-dev-server"

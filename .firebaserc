@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "default": "itsdonezoo-dev",
+    "test": "itsdonezoo-test",
+    "prod": "itsdonezoo-prod"
+  }
+}

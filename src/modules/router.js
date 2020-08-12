@@ -13,19 +13,22 @@ export default (id) => {
     patch(vnode, view(path, state));
   };
 
-  const handleUrl = (hash) => {
-    const items = hash.split("?");
-    const route = items[0].replace(/^#\/?|\/$/g, "").split("/");
-    const query = queryString.parse(items[1] || "");
-    console.info("route", route, query, hash);
-    render(route[0] || "/#/dashboard", query);
+  const parseHash = (hash) => {
+    const [url, params] = hash.split("?");
+    console.log(url, params);
+    const path = url.replace(/^#\/?|\/$/g, "").split("/");
+    const state = queryString.parse(params || "");
+    console.info("path", path, state, hash);
+    return { path, state };
   };
 
   document.addEventListener("DOMContentLoaded", (event) => {
-    handleUrl(location.hash);
+    const { path, state } = parseHash(location.hash);
+    render(path, state);
   });
 
   onpopstate = () => {
-    handleUrl(location.hash);
+    const { path, state } = parseHash(location.hash);
+    render(path, state);
   };
 };

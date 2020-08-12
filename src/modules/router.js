@@ -18,7 +18,8 @@ export default (id) => {
     const items = hash.split("?");
     const route = items[0].replace(/^#\/?|\/$/g, "").split("/");
     const query = queryString.parse(items[1] || "");
-    renderPath(route[0] || "/", query);
+    console.info("route", route, query, hash);
+    renderPath(route[0] || "/#/dashboard", query);
   };
 
   document.addEventListener("DOMContentLoaded", (event) => {

@@ -10,22 +10,24 @@ export default ({}, children) => (
   <nav style={{ backgroundColor: "lightgrey" }}>
     <ul
       style={{
+        margin: "0px",
+        padding: "0px",
         display: "flex",
         justifyContent: "flex-start",
         width: "100%",
       }}
     >
       <li style={style}>
-        <a href="#">Home</a>
-      </li>
-      <li style={style}>
-        <a href="/#/about">About</a>
+        <a href="/#/dashboard">Dashboard</a>
       </li>
       <li style={style}>
         <a href="/#/profile">Profile</a>
       </li>
       <li style={style}>
         <a href="/#/lists">Lists</a>
+      </li>
+      <li style={style}>
+        <a href="/#/about">About</a>
       </li>
     </ul>
   </nav>

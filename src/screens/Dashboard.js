@@ -8,7 +8,7 @@ export default () => (
     {process.env.APP_ENVIRONMENT && (
       <span>({process.env.APP_ENVIRONMENT})</span>
     )}
-    <h2>Home</h2>
+    <h2>Dashboard</h2>
     <p>
       Maybe some dashboard stuff could go here. Total number of lists, total
       number of uncompleted items or uncompleted lists. Whatever.

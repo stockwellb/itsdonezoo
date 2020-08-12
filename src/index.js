@@ -6,10 +6,12 @@ import Nav from "./components/Nav";
 import routerInit from "./modules/router";
 
 routerInit("content");
-const container = document.getElementById("root");
-patch(
-  container,
+
+const vnode = document.getElementById("root");
+const view = (data) => (
   <App>
     <Nav />
   </App>
 );
+
+patch(vnode, view({}));

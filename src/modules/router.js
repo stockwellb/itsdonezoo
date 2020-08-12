@@ -3,15 +3,14 @@ import { patch } from "./vdom";
 import queryString from "query-string";
 
 export default (id) => {
-  const getVnode = (path, state) => {
+  const view = (path, state) => {
     const f = routes[path] || routes["dashboard"];
     return f(state);
   };
 
-  const renderPath = (path, state) => {
-    const element = document.getElementById(id);
-    const vnode = getVnode(path, state);
-    patch(element, vnode);
+  const render = (path, state) => {
+    const vnode = document.getElementById(id);
+    patch(vnode, view(path, state));
   };
 
   const handleUrl = (hash) => {
@@ -19,7 +18,7 @@ export default (id) => {
     const route = items[0].replace(/^#\/?|\/$/g, "").split("/");
     const query = queryString.parse(items[1] || "");
     console.info("route", route, query, hash);
-    renderPath(route[0] || "/#/dashboard", query);
+    render(route[0] || "/#/dashboard", query);
   };
 
   document.addEventListener("DOMContentLoaded", (event) => {

@@ -4,6 +4,7 @@ import queryString from "query-string";
 
 export default (id) => {
   const view = (path, state) => {
+    console.log("view", path, state);
     const f = routes[path] || routes["dashboard"];
     return f(state);
   };

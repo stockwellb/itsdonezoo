@@ -4,7 +4,7 @@ import queryString from "query-string";
 
 export default (id) => {
   const getVnode = (path, state) => {
-    const f = routes[path] || routes["/"];
+    const f = routes[path] || routes["dashboard"];
     return f(state);
   };
 

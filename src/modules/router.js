@@ -15,7 +15,6 @@ export default (id) => {
 
   const parseHash = (hash) => {
     const [url, params] = hash.split("?");
-    console.log(url, params);
     const path = url.replace(/^#\/?|\/$/g, "").split("/");
     const state = queryString.parse(params || "");
     console.info("path", path, state, hash);

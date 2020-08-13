@@ -6,26 +6,32 @@ import Nav from "./components/Nav";
 import routerInit from "./modules/router";
 import { auth } from "./modules/firebase";
 
+const DASHBOARD = "/dashboard";
+const LOGIN = "/login";
+const STORAGE_LOCATION = "itsdonezoo.signedIn";
+const ROOT_LOCATOR = "root";
+const CONTENT_LOCATOR = "content";
+const NAV_LOCATOR = "nav";
+
 const isAuth = () =>
-  auth().currentUser !== null ||
-  localStorage.getItem("itsdonezoo.signedIn") === "1";
+  auth().currentUser !== null || localStorage.getItem(STORAGE_LOCATION) === "1";
 
-routerInit("content", isAuth, "/dashboard", "/login");
+routerInit(CONTENT_LOCATOR, isAuth, DASHBOARD, LOGIN);
 
-const vnode = document.getElementById("root");
+const vnode = document.getElementById(ROOT_LOCATOR);
 patch(vnode, <App />);
 
 auth().onAuthStateChanged((user) => {
-  const vnode = document.getElementById("nav");
+  const vnode = document.getElementById(NAV_LOCATOR);
   if (user) {
-    localStorage.setItem("itsdonezoo.signedIn", "1");
+    localStorage.setItem(STORAGE_LOCATION, "1");
     patch(vnode, <Nav />);
-    if (location.hash === "#/login") {
-      location.hash = "/dashboard";
+    if (location.hash === `#${LOGIN}`) {
+      location.hash = DASHBOARD;
     }
   } else {
-    patch(vnode, <div id="nav"></div>);
-    localStorage.removeItem("itsdonezoo.signedIn");
-    location.hash = "/login";
+    patch(vnode, <div id={NAV_LOCATOR}></div>);
+    localStorage.removeItem(STORAGE_LOCATION);
+    location.hash = LOGIN;
   }
 });

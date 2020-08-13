@@ -3,9 +3,11 @@ import { patch } from "../modules/vdom";
 
 const Dashboard = () => {
   let state = { count: 0 };
+
   const setState = (newState) => {
     state = { ...state, ...newState };
   };
+
   const handleClick = (e) => {
     const vnode = document.getElementById("dashboard_button");
     setState({ count: state.count + 1 });

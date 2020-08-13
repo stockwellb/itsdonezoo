@@ -1,4 +1,5 @@
-import * as firebase from "firebase";
+import firebase from "firebase/app";
+import "firebase/auth";
 
 const firebaseConfig = {
   apiKey: process.env.API_KEY,
@@ -13,12 +14,4 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-firebase.auth().onAuthStateChanged((user) => {
-  if (user) {
-    location.hash = "/dashboard";
-  } else {
-    location.hash = "/login";
-  }
-});
-
-export default firebase;
+export const auth = firebase.auth;

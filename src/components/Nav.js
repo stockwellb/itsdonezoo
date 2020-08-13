@@ -7,7 +7,7 @@ const style = {
   listStyleType: "none",
 };
 export default ({}, children) => (
-  <nav style={{ backgroundColor: "lightgrey" }}>
+  <nav id="nav" style={{ backgroundColor: "lightgrey" }}>
     <ul
       style={{
         margin: "0px",

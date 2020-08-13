@@ -5,7 +5,7 @@ const handleLogout = () => {
 };
 
 export default () => (
-  <section id="content">
+  <section id="content" style={{ margin: "16px" }}>
     <h2>Profile</h2>
     <p>Some stuff about you should go here.</p>
     <ul>

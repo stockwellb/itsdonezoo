@@ -1,7 +1,7 @@
 import Snabbdom from "snabbdom-pragma";
 
 export default ({}, children) => (
-  <section id="content">
+  <section id="content" style={{ margin: "16px" }}>
     <h2>Lists</h2>
     <nav>
       <ul>

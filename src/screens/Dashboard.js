@@ -23,7 +23,7 @@ const Dashboard = () => {
   };
 
   return (
-    <section id="content">
+    <section id="content" style={{ margin: "16px" }}>
       <h1>{process.env.APP_TITLE}</h1>
       <p>{process.env.APP_CAPTION}</p>
       {process.env.APP_ENVIRONMENT && (

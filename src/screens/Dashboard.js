@@ -2,11 +2,14 @@ import Snabbdom from "snabbdom-pragma";
 import { patch } from "../modules/vdom";
 
 const Dashboard = () => {
-  let count = 0;
+  let state = { count: 0 };
+  const setState = (newState) => {
+    state = { ...state, ...newState };
+  };
   const handleClick = (e) => {
     const vnode = document.getElementById("dashboard_button");
-    count++;
-    patch(vnode, view(count));
+    setState({ count: state.count + 1 });
+    patch(vnode, view(state.count));
   };
 
   const view = (count) => {

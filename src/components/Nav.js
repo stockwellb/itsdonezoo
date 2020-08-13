@@ -6,8 +6,10 @@ const style = {
   flex: "0 1 auto",
   listStyleType: "none",
 };
+
+const tagStyle = { color: "white", textDecoration: "none" };
 export default ({}, children) => (
-  <nav id="nav" style={{ backgroundColor: "lightgrey" }}>
+  <nav id="nav" style={{ backgroundColor: "#8510d8" }}>
     <ul
       style={{
         margin: "0px",
@@ -18,16 +20,24 @@ export default ({}, children) => (
       }}
     >
       <li style={style}>
-        <a href="/#/dashboard">Dashboard</a>
+        <a href="/#/dashboard" style={tagStyle}>
+          Dashboard
+        </a>
       </li>
       <li style={style}>
-        <a href="/#/profile">Profile</a>
+        <a href="/#/profile" style={tagStyle}>
+          Profile
+        </a>
       </li>
       <li style={style}>
-        <a href="/#/lists">Lists</a>
+        <a href="/#/lists" style={tagStyle}>
+          Lists
+        </a>
       </li>
       <li style={style}>
-        <a href="/#/about">About</a>
+        <a href="/#/about" style={tagStyle}>
+          About
+        </a>
       </li>
     </ul>
   </nav>

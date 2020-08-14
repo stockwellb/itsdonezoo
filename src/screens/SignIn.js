@@ -56,6 +56,7 @@ export default () => {
             style={{
               width: "225px",
               fontSize: "18px",
+              padding: "8px",
               marginBottom: "10px",
               border: "1px solid #8510d8",
             }}
@@ -77,6 +78,7 @@ export default () => {
             style={{
               width: "225px",
               fontSize: "18px",
+              padding: "8px",
               border: "1px solid #8510d8",
             }}
             id="password"
@@ -89,14 +91,14 @@ export default () => {
             type="button"
             on-click={handleSignIn}
             style={{
-              marginTop: "18px",
+              marginTop: "32px",
               backgroundColor: "#8510d8",
               border: "4px double white",
               color: "white",
               textAlign: "center",
               fontSize: "18px",
               padding: "8px",
-              width: "150px",
+              width: "245px",
               transition: "all 0.5s",
               cursor: "pointer",
             }}
@@ -104,8 +106,14 @@ export default () => {
             Sign in
           </button>
         </form>
-        <a style={{ fontSize: "18px" }} href="/#/forgot-password">
+        <a
+          style={{ fontSize: "18px", margin: "8px" }}
+          href="/#/forgot-password"
+        >
           I forgot my password
+        </a>
+        <a style={{ fontSize: "18px", margin: "8px" }} href="/#/registration">
+          I'd like to sign up!
         </a>
       </div>
     </div>

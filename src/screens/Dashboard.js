@@ -24,11 +24,6 @@ const Dashboard = () => {
 
   return (
     <section id="content" style={{ margin: "16px" }}>
-      <h1>{process.env.APP_TITLE}</h1>
-      <p>{process.env.APP_CAPTION}</p>
-      {process.env.APP_ENVIRONMENT && (
-        <span>({process.env.APP_ENVIRONMENT})</span>
-      )}
       <h2>Dashboard</h2>
       <p>
         Maybe some dashboard stuff could go here. Total number of lists, total

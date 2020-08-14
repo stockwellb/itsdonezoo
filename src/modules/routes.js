@@ -24,5 +24,5 @@ export const routes = {
     f: (params) => <ForgotPassword {...params} />,
     public: true,
   },
-  registration: { f: (params) => <Registration {...params} />, public: false },
+  registration: { f: (params) => <Registration {...params} />, public: true },
 };

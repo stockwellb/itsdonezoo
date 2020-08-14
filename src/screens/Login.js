@@ -1,5 +1,4 @@
 import Snabbdom from "snabbdom-pragma";
-import { patch } from "../modules/vdom";
 import { login } from "../modules/api";
 
 export default () => {
@@ -26,48 +25,70 @@ export default () => {
   };
 
   return (
-    <section id="content">
-      <h2>Login</h2>
-      <form>
-        <div style={{ display: "table" }}>
-          <div style={{ display: "table-row" }}>
-            <label
-              style={{ display: "table-cell", marginBottom: "10px" }}
-              for="email"
+    <div id="content">
+      <div style={{ margin: "16px" }}>
+        <h2>Login</h2>
+        <form>
+          <div style={{ display: "table" }}>
+            <div style={{ display: "table-row" }}>
+              <label
+                style={{
+                  display: "table-cell",
+                  marginBottom: "10px",
+                  paddingRight: "8px",
+                }}
+                for="email"
+              >
+                Email
+              </label>
+              <input
+                style={{
+                  display: "table-cell",
+                  marginBottom: "10px",
+                  border: "1px solid #8510d8",
+                }}
+                id="email"
+                type="email"
+                autocomplete="email"
+                on-input={handleEmailInput}
+              ></input>
+            </div>
+            <div style={{ display: "table-row" }}>
+              <label
+                style={{
+                  display: "table-cell",
+                  marginBottom: "10px",
+                  paddingRight: "8px",
+                }}
+                for="password"
+              >
+                Password
+              </label>
+              <input
+                style={{
+                  display: "table-cell",
+                  marginBottom: "10px",
+                  border: "1px solid #8510d8",
+                }}
+                auto
+                id="password"
+                name="password"
+                type="password"
+                autocomplete="current-password"
+                on-input={handlePasswordInput}
+              ></input>
+            </div>
+            <button
+              type="button"
+              on-click={handleLogin}
+              style={{ border: "1px solid #8510d8" }}
             >
-              Email
-            </label>
-            <input
-              style={{ display: "table-cell", marginBottom: "10px" }}
-              id="email"
-              type="email"
-              autocomplete="email"
-              on-input={handleEmailInput}
-            ></input>
+              Login
+            </button>
           </div>
-          <div style={{ display: "table-row" }}>
-            <label
-              style={{ display: "table-cell", marginBottom: "10px" }}
-              for="password"
-            >
-              Password
-            </label>
-            <input
-              style={{ display: "table-cell", marginBottom: "10px" }}
-              auto
-              id="password"
-              name="password"
-              type="password"
-              autocomplete="current-password"
-              on-input={handlePasswordInput}
-            ></input>
-          </div>
-          <button type="button" on-click={handleLogin}>
-            Login
-          </button>
-        </div>
-      </form>
-      <a href="/#/forgot-password">forgot password</a>
-    </section>
+        </form>
+        <a href="/#/forgot-password">forgot password</a>
+      </div>
+    </div>
   );
 };

@@ -128,7 +128,7 @@ export default () => {
           }}
           href="/#/signup"
         >
-          I'd like to sign up!
+          I need an account!
         </a>
       </div>
     </div>

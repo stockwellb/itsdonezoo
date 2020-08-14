@@ -10,7 +10,7 @@ const liStyle = {
 const tagStyle = {
   color: `${process.env.PRIMARY_TEXT_COLOR}`,
   textDecoration: "none",
-  "&::hover": {
+  "&:hover": {
     color: `${process.env.PRIMARY_DARK_TEXT_COLOR}`,
   },
 };

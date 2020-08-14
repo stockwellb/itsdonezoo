@@ -4,6 +4,9 @@ export default ({}, children) => (
   <div
     id="header"
     style={{
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
       margin: "0px",
       padding: "16px",
       backgroundColor: "#8510d8",
@@ -18,8 +21,8 @@ export default ({}, children) => (
     </h1>
     <h5
       style={{
+        marginTop: "0px",
         color: "white",
-        marginLeft: "16px",
       }}
     >
       {process.env.APP_MORE_INFO}

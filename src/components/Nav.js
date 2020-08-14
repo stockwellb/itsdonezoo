@@ -9,7 +9,7 @@ const style = {
 
 const tagStyle = { color: "white", textDecoration: "none" };
 export default ({}, children) => (
-  <nav id="nav" style={{ backgroundColor: "#5b0a91" }}>
+  <nav id="nav" style={{ backgroundColor: "#6a0dad" }}>
     <ul
       style={{
         margin: "0px",

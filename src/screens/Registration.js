@@ -36,7 +36,7 @@ export default () => {
             <button type="submit">Register</button>
           </div>
         </form>
-        <a href="/#/login">login</a>
+        <a href="/#/signin">Sign In</a>
       </div>
     </div>
   );

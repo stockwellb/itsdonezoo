@@ -1,7 +1,7 @@
 import Snabbdom from "snabbdom-pragma";
-import { logout } from "../modules/api";
-const handleLogout = () => {
-  return logout();
+import { signOut } from "../modules/api";
+const handleSignOut = () => {
+  return signOut();
 };
 
 export default () => (
@@ -10,7 +10,7 @@ export default () => (
     <p>Some stuff about you should go here.</p>
     <ul>
       <li>
-        <a href="#" on-click={handleLogout}>
+        <a href="#" on-click={handleSignOut}>
           Sign out
         </a>
       </li>

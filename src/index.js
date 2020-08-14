@@ -7,7 +7,7 @@ import routerInit from "./modules/router";
 import { auth } from "./modules/firebase";
 
 const DASHBOARD = "/dashboard";
-const LOGIN = "/login";
+const SIGNIN = "/signin";
 const STORAGE_LOCATION = "itsdonezoo.signedIn";
 const ROOT_LOCATOR = "root";
 const CONTENT_LOCATOR = "content";
@@ -16,7 +16,7 @@ const NAV_LOCATOR = "nav";
 const isAuth = () =>
   auth().currentUser !== null || localStorage.getItem(STORAGE_LOCATION) === "1";
 
-routerInit(CONTENT_LOCATOR, isAuth, DASHBOARD, LOGIN);
+routerInit(CONTENT_LOCATOR, isAuth, DASHBOARD, SIGNIN);
 
 const vnode = document.getElementById(ROOT_LOCATOR);
 patch(vnode, <App />);
@@ -26,12 +26,12 @@ auth().onAuthStateChanged((user) => {
   if (user) {
     localStorage.setItem(STORAGE_LOCATION, "1");
     patch(vnode, <Nav />);
-    if (location.hash === `#${LOGIN}`) {
+    if (location.hash === `#${SIGNIN}`) {
       location.hash = DASHBOARD;
     }
   } else {
     patch(vnode, <div id={NAV_LOCATOR}></div>);
     localStorage.removeItem(STORAGE_LOCATION);
-    location.hash = LOGIN;
+    location.hash = SIGNIN;
   }
 });

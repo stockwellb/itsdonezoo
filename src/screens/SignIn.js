@@ -1,5 +1,5 @@
 import Snabbdom from "snabbdom-pragma";
-import { login } from "../modules/api";
+import { signIn } from "../modules/api";
 
 export default () => {
   let state = { email: "", password: "" };
@@ -20,8 +20,8 @@ export default () => {
     vnode.value = state.password;
   };
 
-  const handleLogin = () => {
-    return login(state.email, state.password);
+  const handleSignIn = () => {
+    return signIn(state.email, state.password);
   };
 
   return (
@@ -87,7 +87,7 @@ export default () => {
           ></input>
           <button
             type="button"
-            on-click={handleLogin}
+            on-click={handleSignIn}
             style={{
               marginTop: "18px",
               backgroundColor: "#8510d8",

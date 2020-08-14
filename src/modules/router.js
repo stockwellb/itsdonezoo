@@ -2,7 +2,7 @@ import { routes } from "./routes";
 import { patch } from "./vdom";
 import queryString from "query-string";
 
-export default (id, isAuth, defaultPath, loginPath) => {
+export default (id, isAuth, defaultPath, signInPath) => {
   const view = (path, state) => {
     const authenticated = isAuth();
     console.log("route", path, state, authenticated);
@@ -14,7 +14,7 @@ export default (id, isAuth, defaultPath, loginPath) => {
     }
 
     if (!route.public && !authenticated) {
-      location.hash = loginPath;
+      location.hash = signInPath;
       return null;
     }
 

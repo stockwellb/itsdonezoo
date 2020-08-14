@@ -4,7 +4,7 @@ import About from "../screens/About";
 import Profile from "../screens/Profile";
 import Lists from "../screens/Lists";
 import List from "../screens/List";
-import Login from "../screens/Login";
+import SignIn from "../screens/SignIn";
 import Registration from "../screens/Registration";
 import ChangePassword from "../screens/ChangePassword";
 import ForgotPassword from "../screens/ForgotPassword";
@@ -15,7 +15,7 @@ export const routes = {
   profile: { f: (params) => <Profile {...params} />, public: false },
   lists: { f: (params) => <Lists {...params} />, public: false },
   list: { f: (params) => <List {...params} />, public: false },
-  login: { f: (params) => <Login {...params} />, public: true },
+  signin: { f: (params) => <SignIn {...params} />, public: true },
   "change-password": {
     f: (params) => <ChangePassword {...params} />,
     public: false,

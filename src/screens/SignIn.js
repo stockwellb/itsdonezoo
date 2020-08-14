@@ -57,6 +57,7 @@ export default () => {
               width: "225px",
               fontSize: "18px",
               padding: "8px",
+              color: "#5d5d5d",
               marginBottom: "10px",
               border: "1px solid #8510d8",
             }}
@@ -79,6 +80,7 @@ export default () => {
               width: "225px",
               fontSize: "18px",
               padding: "8px",
+              color: "#5d5d5d",
               border: "1px solid #8510d8",
             }}
             id="password"
@@ -107,12 +109,25 @@ export default () => {
           </button>
         </form>
         <a
-          style={{ fontSize: "18px", margin: "8px" }}
+          style={{
+            fontSize: "18px",
+            margin: "8px",
+            color: "#5d5d5d",
+            textDecoration: "none",
+          }}
           href="/#/forgot-password"
         >
           I forgot my password
         </a>
-        <a style={{ fontSize: "18px", margin: "8px" }} href="/#/registration">
+        <a
+          style={{
+            fontSize: "18px",
+            margin: "8px",
+            color: "#5d5d5d",
+            textDecoration: "none",
+          }}
+          href="/#/registration"
+        >
           I'd like to sign up!
         </a>
       </div>

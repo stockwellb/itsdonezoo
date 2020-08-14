@@ -9,6 +9,15 @@ export const signIn = (email, password) => {
     });
 };
 
+export const signUp = (email, password) => {
+  return auth()
+    .createUserWithEmailAndPassword(email, password)
+    .then(() => console.log("account created"))
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
 export const signOut = () => {
   return auth()
     .signOut()

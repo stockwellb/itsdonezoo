@@ -5,7 +5,7 @@ import Profile from "../screens/Profile";
 import Lists from "../screens/Lists";
 import List from "../screens/List";
 import SignIn from "../screens/SignIn";
-import Registration from "../screens/Registration";
+import SignUp from "../screens/SignUp";
 import ChangePassword from "../screens/ChangePassword";
 import ForgotPassword from "../screens/ForgotPassword";
 
@@ -24,5 +24,5 @@ export const routes = {
     f: (params) => <ForgotPassword {...params} />,
     public: true,
   },
-  registration: { f: (params) => <Registration {...params} />, public: true },
+  signup: { f: (params) => <SignUp {...params} />, public: true },
 };

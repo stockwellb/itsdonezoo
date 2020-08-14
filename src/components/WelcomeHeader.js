@@ -9,12 +9,12 @@ export default ({}, children) => (
       alignItems: "center",
       margin: "0px",
       padding: "16px",
-      backgroundColor: "#8510d8",
+      backgroundColor: `${process.env.PRIMARY_COLOR}`,
     }}
   >
     <h1
       style={{
-        color: "white",
+        color: `${process.env.PRIMARY_TEXT_COLOR}`,
       }}
     >
       {`${process.env.APP_TITLE}, ${process.env.APP_CALL_TO_ACTION}`}
@@ -22,7 +22,7 @@ export default ({}, children) => (
     <h5
       style={{
         marginTop: "0px",
-        color: "white",
+        color: `${process.env.PRIMARY_TEXT_COLOR}`,
       }}
     >
       {process.env.APP_MORE_INFO}

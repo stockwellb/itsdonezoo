@@ -9,11 +9,13 @@ export default (id, isAuth, defaultPath, signInPath) => {
     const route = routes[path];
 
     if (!route) {
+      console.log(`no route, rerouting to ${defaultPath}`);
       location.hash = defaultPath;
       return null;
     }
 
     if (!route.public && !authenticated) {
+      console.log(`not logged in rerouting to ${defaultPath}`);
       location.hash = signInPath;
       return null;
     }

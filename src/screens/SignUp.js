@@ -1,5 +1,5 @@
 import Snabbdom from "snabbdom-pragma";
-import { signIn } from "../modules/api";
+import { signUp } from "../modules/api";
 
 export default () => {
   let state = { email: "", password: "" };
@@ -20,8 +20,8 @@ export default () => {
     vnode.value = state.password;
   };
 
-  const handleSignIn = () => {
-    return signIn(state.email, state.password);
+  const handleSignUp = () => {
+    return signUp(state.email, state.password);
   };
 
   return (
@@ -34,7 +34,7 @@ export default () => {
           alignItems: "center",
         }}
       >
-        <h2>Sign in to your {process.env.APP_TITLE} account.</h2>
+        <h2>Sign up for your {process.env.APP_TITLE} account.</h2>
         <form
           style={{
             display: "flex",
@@ -57,7 +57,7 @@ export default () => {
               width: "225px",
               fontSize: "18px",
               padding: "8px",
-              color: "#5d5d5d",
+              color: `${process.env.DEFAULT_TEXT_COLOR}`,
               marginBottom: "10px",
               border: `1px solid ${process.env.PRIMARY_COLOR}`,
             }}
@@ -80,7 +80,7 @@ export default () => {
               width: "225px",
               fontSize: "18px",
               padding: "8px",
-              color: "#5d5d5d",
+              color: `${process.env.DEFAULT_TEXT_COLOR}`,
               border: `1px solid ${process.env.PRIMARY_COLOR}`,
             }}
             id="password"
@@ -91,7 +91,7 @@ export default () => {
           ></input>
           <button
             type="button"
-            on-click={handleSignIn}
+            on-click={handleSignUp}
             style={{
               marginTop: "32px",
               backgroundColor: `${process.env.PRIMARY_COLOR}`,
@@ -105,7 +105,7 @@ export default () => {
               cursor: "pointer",
             }}
           >
-            Sign in
+            Sign me up!
           </button>
         </form>
         <a
@@ -115,20 +115,9 @@ export default () => {
             color: `${process.env.DEFAULT_TEXT_COLOR}`,
             textDecoration: "none",
           }}
-          href="/#/forgot-password"
+          href="/#/signin"
         >
-          I forgot my password
-        </a>
-        <a
-          style={{
-            fontSize: "18px",
-            margin: "8px",
-            color: `${process.env.DEFAULT_TEXT_COLOR}`,
-            textDecoration: "none",
-          }}
-          href="/#/signup"
-        >
-          I'd like to sign up!
+          I have an account. I neet to sign in.
         </a>
       </div>
     </div>

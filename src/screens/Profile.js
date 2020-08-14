@@ -10,12 +10,12 @@ export default () => (
     <p>Some stuff about you should go here.</p>
     <ul>
       <li>
-        <button type="button" on-click={handleLogout}>
-          logout
-        </button>
+        <a href="#" on-click={handleLogout}>
+          Sign out
+        </a>
       </li>
       <li>
-        <a href="/#/change-password">change password</a>
+        <a href="/#/change-password">Change password</a>
       </li>
     </ul>
   </section>

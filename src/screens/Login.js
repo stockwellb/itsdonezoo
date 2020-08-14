@@ -26,68 +26,87 @@ export default () => {
 
   return (
     <div id="content">
-      <div style={{ margin: "16px" }}>
-        <h2>Login</h2>
-        <form>
-          <div style={{ display: "table" }}>
-            <div style={{ display: "table-row" }}>
-              <label
-                style={{
-                  display: "table-cell",
-                  marginBottom: "10px",
-                  paddingRight: "8px",
-                }}
-                for="email"
-              >
-                Email
-              </label>
-              <input
-                style={{
-                  display: "table-cell",
-                  marginBottom: "10px",
-                  border: "1px solid #8510d8",
-                }}
-                id="email"
-                type="email"
-                autocomplete="email"
-                on-input={handleEmailInput}
-              ></input>
-            </div>
-            <div style={{ display: "table-row" }}>
-              <label
-                style={{
-                  display: "table-cell",
-                  marginBottom: "10px",
-                  paddingRight: "8px",
-                }}
-                for="password"
-              >
-                Password
-              </label>
-              <input
-                style={{
-                  display: "table-cell",
-                  marginBottom: "10px",
-                  border: "1px solid #8510d8",
-                }}
-                auto
-                id="password"
-                name="password"
-                type="password"
-                autocomplete="current-password"
-                on-input={handlePasswordInput}
-              ></input>
-            </div>
-            <button
-              type="button"
-              on-click={handleLogin}
-              style={{ border: "1px solid #8510d8" }}
-            >
-              Login
-            </button>
-          </div>
+      <div
+        style={{
+          margin: "16px",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <h2>Sign in to your {process.env.APP_TITLE} account.</h2>
+        <form
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            marginBottom: "16px",
+          }}
+        >
+          <label
+            style={{
+              fontSize: "18px",
+              marginBottom: "4px",
+            }}
+            for="email"
+          >
+            Email
+          </label>
+          <input
+            style={{
+              width: "225px",
+              fontSize: "18px",
+              marginBottom: "10px",
+              border: "1px solid #8510d8",
+            }}
+            id="email"
+            type="email"
+            autocomplete="email"
+            on-input={handleEmailInput}
+          ></input>
+          <label
+            style={{
+              fontSize: "18px",
+              marginBottom: "4px",
+            }}
+            for="password"
+          >
+            Password
+          </label>
+          <input
+            style={{
+              width: "225px",
+              fontSize: "18px",
+              border: "1px solid #8510d8",
+            }}
+            id="password"
+            name="password"
+            type="password"
+            autocomplete="current-password"
+            on-input={handlePasswordInput}
+          ></input>
+          <button
+            type="button"
+            on-click={handleLogin}
+            style={{
+              marginTop: "18px",
+              backgroundColor: "#8510d8",
+              border: "4px double white",
+              color: "white",
+              textAlign: "center",
+              fontSize: "18px",
+              padding: "8px",
+              width: "150px",
+              transition: "all 0.5s",
+              cursor: "pointer",
+            }}
+          >
+            Sign in
+          </button>
         </form>
-        <a href="/#/forgot-password">forgot password</a>
+        <a style={{ fontSize: "18px" }} href="/#/forgot-password">
+          I forgot my password
+        </a>
       </div>
     </div>
   );

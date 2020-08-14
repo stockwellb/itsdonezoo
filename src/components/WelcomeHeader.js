@@ -14,7 +14,7 @@ export default ({}, children) => (
         color: "white",
       }}
     >
-      {process.env.APP_CALL_TO_ACTION}
+      {`${process.env.APP_TITLE}, ${process.env.APP_CALL_TO_ACTION}`}
     </h1>
     <h5
       style={{

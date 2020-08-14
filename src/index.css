@@ -11,4 +11,14 @@ body {
   padding: 0;
   border: 0;
   outline: 0;
+  color: #5d5d5d;
+}
+
+input {
+  border: "1px solid #8510d8";
+}
+
+input:focus {
+  outline: none;
+  border: "2px solid #8510d8";
 }

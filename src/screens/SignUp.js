@@ -48,21 +48,25 @@ export default () => {
           }}
         >
           <Label for="email">Email</Label>
-          <Input
+          <TextField
+            width="225px"
             id="email"
             type="email"
             autocomplete="email"
             on-input={handleEmailInput}
           />
           <Label for="password">Password</Label>
-          <Input
+          <TextField
+            width="225px"
             id="password"
             name="password"
             type="password"
             autocomplete="current-password"
             on-input={handlePasswordInput}
           />
-          <Button on-click={handleSignUp}>Sign me up!</Button>
+          <Button width="245px" on-click={handleSignUp}>
+            Sign me up!
+          </Button>
         </form>
         <Link href="/#/signin">Just sign me in.</Link>
       </div>

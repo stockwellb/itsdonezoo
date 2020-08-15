@@ -1,5 +1,5 @@
 import Snabbdom from "snabbdom-pragma";
-import { Content } from "../components";
+import { Content, Link } from "../components";
 
 export default ({}, children) => (
   <Content style={{ margin: "16px" }}>
@@ -7,10 +7,10 @@ export default ({}, children) => (
     <nav>
       <ul>
         <li>
-          <a href="/#/list?id=1">List 1</a>
+          <Link href="/#/list?id=1">List 1</Link>
         </li>
         <li>
-          <a href="/#/list?id=2">List 2</a>
+          <Link href="/#/list?id=2">List 2</Link>
         </li>
       </ul>
     </nav>

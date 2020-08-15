@@ -1,6 +1,6 @@
 import Snabbdom from "snabbdom-pragma";
 import { signOut } from "../modules/api";
-import { Content } from "../components";
+import { Content, Link } from "../components";
 
 const handleSignOut = () => {
   return signOut();
@@ -12,12 +12,12 @@ export default () => (
     <p>Some stuff about you should go here.</p>
     <ul>
       <li>
-        <a href="#" on-click={handleSignOut}>
+        <Link href="#" on-click={handleSignOut}>
           Sign out
-        </a>
+        </Link>
       </li>
       <li>
-        <a href="/#/change-password">Change password</a>
+        <Link href="/#/change-password">Change password</Link>
       </li>
     </ul>
   </Content>

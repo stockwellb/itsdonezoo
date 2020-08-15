@@ -1,17 +1,15 @@
 import Snabbdom from "snabbdom-pragma";
 
-export default ({ href, ...rest }, children) => {
+export default ({ href, style, ...rest }, children) => {
+  const baseStyle = {
+    fontSize: "18px",
+    margin: "8px",
+    color: `${process.env.DEFAULT_TEXT_COLOR}`,
+    textDecoration: "none",
+  };
+
   return (
-    <a
-      style={{
-        fontSize: "18px",
-        margin: "8px",
-        color: `${process.env.DEFAULT_TEXT_COLOR}`,
-        textDecoration: "none",
-      }}
-      href={href}
-      {...rest}
-    >
+    <a style={{ ...baseStyle, ...style }} href={href} {...rest}>
       {children}
     </a>
   );

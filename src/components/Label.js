@@ -1,12 +1,11 @@
 import Snabbdom from "snabbdom-pragma";
-export default ({ ...rest }, children) => {
+export default ({ style, ...rest }, children) => {
+  const baseStyle = {
+    fontSize: "18px",
+  };
+
   return (
-    <label
-      style={{
-        fontSize: "18px",
-      }}
-      {...rest}
-    >
+    <label style={{ ...baseStyle, style }} {...rest}>
       {children}
     </label>
   );

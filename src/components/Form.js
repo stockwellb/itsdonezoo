@@ -1,7 +1,7 @@
 import Snabbdom from "snabbdom-pragma";
 
 export default ({ center, style, ...rest }, children) => {
-  let centeredStyle = {
+  const centeredStyle = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -12,10 +12,11 @@ export default ({ center, style, ...rest }, children) => {
     padding: "8px",
   };
 
-  centeredStyle = center ? centeredStyle : {};
-
   return (
-    <form {...rest} style={{ ...baseStyle, ...centeredStyle, ...style }}>
+    <form
+      style={{ ...baseStyle, ...(center && centeredStyle), ...style }}
+      {...rest}
+    >
       {children}
     </form>
   );

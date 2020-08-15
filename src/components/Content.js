@@ -7,10 +7,12 @@ export default ({ center, style, ...rest }, children) => {
     alignItems: "center",
   };
 
-  const baseStyle = center ? centeredStyle : {};
-
   return (
-    <div id="content" {...rest} style={{ ...baseStyle, ...style }}>
+    <div
+      id="content"
+      style={{ ...(center && centeredStyle), ...style }}
+      {...rest}
+    >
       {children}
     </div>
   );

@@ -3,7 +3,7 @@ import { signUp } from "../modules/api";
 import TextField from "../components/TextField";
 import Button from "../components/Button";
 import Link from "../components/Link";
-import Label from "../components/Label";
+import Form from "../components/Form";
 import Content from "../components/Content";
 
 export default () => {
@@ -32,35 +32,33 @@ export default () => {
   return (
     <Content center style={{ margin: "16px" }}>
       <h2>Sign up for your {process.env.APP_TITLE} account.</h2>
-      <form
+      <Form
+        center
         style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
           marginBottom: "16px",
         }}
       >
-        <Label for="email">Email</Label>
         <TextField
           width="225px"
           id="email"
           type="email"
           autocomplete="email"
+          placeholder="Email"
           on-input={handleEmailInput}
         />
-        <Label for="password">Password</Label>
         <TextField
           width="225px"
           id="password"
           name="password"
           type="password"
+          placeholder="Password"
           autocomplete="current-password"
           on-input={handlePasswordInput}
         />
         <Button width="245px" on-click={handleSignUp}>
           Sign me up!
         </Button>
-      </form>
+      </Form>
       <Link href="/#/signin">Just sign me in.</Link>
     </Content>
   );

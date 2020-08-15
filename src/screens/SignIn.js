@@ -57,7 +57,7 @@ export default () => {
               width: "225px",
               fontSize: "18px",
               padding: "8px",
-              color: "#5d5d5d",
+              color: `${process.env.DEFAULT_TEXT_COLOR}`,
               marginBottom: "10px",
               border: `1px solid ${process.env.PRIMARY_COLOR}`,
             }}
@@ -80,7 +80,7 @@ export default () => {
               width: "225px",
               fontSize: "18px",
               padding: "8px",
-              color: "#5d5d5d",
+              color: `${process.env.DEFAULT_TEXT_COLOR}`,
               border: `1px solid ${process.env.PRIMARY_COLOR}`,
             }}
             id="password"

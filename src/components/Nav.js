@@ -11,7 +11,7 @@ const tagStyle = {
   color: `${process.env.PRIMARY_TEXT_COLOR}`,
   textDecoration: "none",
   "&:hover": {
-    color: `${process.env.PRIMARY_DARK_TEXT_COLOR}`,
+    color: `${process.env.SECONDARY_COLOR}`,
   },
 };
 

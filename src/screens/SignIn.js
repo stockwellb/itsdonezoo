@@ -1,5 +1,9 @@
 import Snabbdom from "snabbdom-pragma";
 import { signIn } from "../modules/api";
+import TextField from "../components/TextField";
+import Button from "../components/Button";
+import Link from "../components/Link";
+import Label from "../components/Label";
 
 export default () => {
   let state = { email: "", password: "" };
@@ -40,96 +44,32 @@ export default () => {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            marginBottom: "16px",
+            marginBottom: "8px",
           }}
         >
-          <label
-            style={{
-              fontSize: "18px",
-              marginBottom: "4px",
-            }}
-            for="email"
-          >
-            Email
-          </label>
-          <input
-            style={{
-              width: "225px",
-              fontSize: "18px",
-              padding: "8px",
-              color: `${process.env.DEFAULT_TEXT_COLOR}`,
-              marginBottom: "10px",
-              border: `1px solid ${process.env.PRIMARY_COLOR}`,
-            }}
+          <Label for="email">Email</Label>
+          <TextField
+            width="225px"
             id="email"
             type="email"
             autocomplete="email"
             on-input={handleEmailInput}
-          ></input>
-          <label
-            style={{
-              fontSize: "18px",
-              marginBottom: "4px",
-            }}
-            for="password"
-          >
-            Password
-          </label>
-          <input
-            style={{
-              width: "225px",
-              fontSize: "18px",
-              padding: "8px",
-              color: `${process.env.DEFAULT_TEXT_COLOR}`,
-              border: `1px solid ${process.env.PRIMARY_COLOR}`,
-            }}
+          />
+          <Label for="password">Password</Label>
+          <TextField
+            width="225px"
             id="password"
             name="password"
             type="password"
             autocomplete="current-password"
             on-input={handlePasswordInput}
-          ></input>
-          <button
-            type="button"
-            on-click={handleSignIn}
-            style={{
-              marginTop: "32px",
-              backgroundColor: `${process.env.PRIMARY_COLOR}`,
-              border: "4px double white",
-              color: `${process.env.PRIMARY_TEXT_COLOR}`,
-              textAlign: "center",
-              fontSize: "18px",
-              padding: "8px",
-              width: "245px",
-              transition: "all 0.5s",
-              cursor: "pointer",
-            }}
-          >
+          />
+          <Button width="245px" on-click={handleSignIn}>
             Sign in
-          </button>
+          </Button>
         </form>
-        <a
-          style={{
-            fontSize: "18px",
-            margin: "8px",
-            color: `${process.env.DEFAULT_TEXT_COLOR}`,
-            textDecoration: "none",
-          }}
-          href="/#/forgot-password"
-        >
-          I forgot my password
-        </a>
-        <a
-          style={{
-            fontSize: "18px",
-            margin: "8px",
-            color: `${process.env.DEFAULT_TEXT_COLOR}`,
-            textDecoration: "none",
-          }}
-          href="/#/signup"
-        >
-          I need an account!
-        </a>
+        <Link href="/#/forgot-password">I forgot my password</Link>
+        <Link href="/#/signup">I need an account!</Link>
       </div>
     </div>
   );

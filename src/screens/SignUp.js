@@ -1,5 +1,9 @@
 import Snabbdom from "snabbdom-pragma";
 import { signUp } from "../modules/api";
+import TextField from "../components/TextField";
+import Button from "../components/Button";
+import Link from "../components/Link";
+import Label from "../components/Label";
 
 export default () => {
   let state = { email: "", password: "" };
@@ -43,82 +47,24 @@ export default () => {
             marginBottom: "16px",
           }}
         >
-          <label
-            style={{
-              fontSize: "18px",
-              marginBottom: "4px",
-            }}
-            for="email"
-          >
-            Email
-          </label>
-          <input
-            style={{
-              width: "225px",
-              fontSize: "18px",
-              padding: "8px",
-              color: `${process.env.DEFAULT_TEXT_COLOR}`,
-              marginBottom: "10px",
-              border: `1px solid ${process.env.PRIMARY_COLOR}`,
-            }}
+          <Label for="email">Email</Label>
+          <Input
             id="email"
             type="email"
             autocomplete="email"
             on-input={handleEmailInput}
-          ></input>
-          <label
-            style={{
-              fontSize: "18px",
-              marginBottom: "4px",
-            }}
-            for="password"
-          >
-            Password
-          </label>
-          <input
-            style={{
-              width: "225px",
-              fontSize: "18px",
-              padding: "8px",
-              color: `${process.env.DEFAULT_TEXT_COLOR}`,
-              border: `1px solid ${process.env.PRIMARY_COLOR}`,
-            }}
+          />
+          <Label for="password">Password</Label>
+          <Input
             id="password"
             name="password"
             type="password"
             autocomplete="current-password"
             on-input={handlePasswordInput}
-          ></input>
-          <button
-            type="button"
-            on-click={handleSignUp}
-            style={{
-              marginTop: "32px",
-              backgroundColor: `${process.env.PRIMARY_COLOR}`,
-              border: "4px double white",
-              color: `${process.env.PRIMARY_TEXT_COLOR}`,
-              textAlign: "center",
-              fontSize: "18px",
-              padding: "8px",
-              width: "245px",
-              transition: "all 0.5s",
-              cursor: "pointer",
-            }}
-          >
-            Sign me up!
-          </button>
+          />
+          <Button on-click={handleSignUp}>Sign me up!</Button>
         </form>
-        <a
-          style={{
-            fontSize: "18px",
-            margin: "8px",
-            color: `${process.env.DEFAULT_TEXT_COLOR}`,
-            textDecoration: "none",
-          }}
-          href="/#/signin"
-        >
-          Just sign me in.
-        </a>
+        <Link href="/#/signin">Just sign me in.</Link>
       </div>
     </div>
   );

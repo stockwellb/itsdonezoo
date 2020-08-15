@@ -1,5 +1,6 @@
 import Snabbdom from "snabbdom-pragma";
 import { patch } from "../modules/vdom";
+import Content from "../components/Content";
 
 const Dashboard = () => {
   let state = { count: 0 };
@@ -23,7 +24,7 @@ const Dashboard = () => {
   };
 
   return (
-    <section id="content" style={{ margin: "16px" }}>
+    <Content style={{ margin: "16px" }}>
       <h2>Dashboard</h2>
       <p>
         Maybe some dashboard stuff could go here. Total number of lists, total
@@ -32,7 +33,7 @@ const Dashboard = () => {
       <button id="dashboard_button" type="button" on-click={handleClick}>
         Click me
       </button>
-    </section>
+    </Content>
   );
 };
 

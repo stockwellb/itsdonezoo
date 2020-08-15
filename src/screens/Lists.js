@@ -1,7 +1,8 @@
 import Snabbdom from "snabbdom-pragma";
+import Content from "../components/Content";
 
 export default ({}, children) => (
-  <section id="content" style={{ margin: "16px" }}>
+  <Content style={{ margin: "16px" }}>
     <h2>Lists</h2>
     <nav>
       <ul>
@@ -13,5 +14,5 @@ export default ({}, children) => (
         </li>
       </ul>
     </nav>
-  </section>
+  </Content>
 );

@@ -16,7 +16,7 @@ export default ({ width, ...rest }, children) => {
         transition: "all 0.5s",
         cursor: "pointer",
       }}
-      rest
+      {...rest}
     >
       {children}
     </button>

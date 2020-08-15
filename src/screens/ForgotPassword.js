@@ -1,8 +1,9 @@
 import Snabbdom from "snabbdom-pragma";
+import Content from "../components/Content";
 
 export default () => (
-  <section id="content">
+  <Content style={{ margin: "16px" }}>
     <h2>Forgot Password</h2>
     <p>Don't you hate when that happens</p>
-  </section>
+  </Content>
 );

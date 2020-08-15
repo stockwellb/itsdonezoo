@@ -10,7 +10,7 @@ export default ({ width, ...rest }, children) => {
         color: `${process.env.DEFAULT_TEXT_COLOR}`,
         border: `1px solid ${process.env.PRIMARY_COLOR}`,
       }}
-      rest
+      {...rest}
     >
       {children}
     </input>

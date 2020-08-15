@@ -10,7 +10,7 @@ export default ({ href, ...rest }, children) => {
         textDecoration: "none",
       }}
       href={href}
-      rest
+      {...rest}
     >
       {children}
     </a>

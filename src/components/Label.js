@@ -5,7 +5,7 @@ export default ({ ...rest }, children) => {
       style={{
         fontSize: "18px",
       }}
-      rest
+      {...rest}
     >
       {children}
     </label>

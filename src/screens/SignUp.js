@@ -4,6 +4,7 @@ import TextField from "../components/TextField";
 import Button from "../components/Button";
 import Link from "../components/Link";
 import Label from "../components/Label";
+import Content from "../components/Content";
 
 export default () => {
   let state = { email: "", password: "" };
@@ -29,47 +30,38 @@ export default () => {
   };
 
   return (
-    <div id="content">
-      <div
+    <Content center style={{ margin: "16px" }}>
+      <h2>Sign up for your {process.env.APP_TITLE} account.</h2>
+      <form
         style={{
-          margin: "16px",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
+          marginBottom: "16px",
         }}
       >
-        <h2>Sign up for your {process.env.APP_TITLE} account.</h2>
-        <form
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            marginBottom: "16px",
-          }}
-        >
-          <Label for="email">Email</Label>
-          <TextField
-            width="225px"
-            id="email"
-            type="email"
-            autocomplete="email"
-            on-input={handleEmailInput}
-          />
-          <Label for="password">Password</Label>
-          <TextField
-            width="225px"
-            id="password"
-            name="password"
-            type="password"
-            autocomplete="current-password"
-            on-input={handlePasswordInput}
-          />
-          <Button width="245px" on-click={handleSignUp}>
-            Sign me up!
-          </Button>
-        </form>
-        <Link href="/#/signin">Just sign me in.</Link>
-      </div>
-    </div>
+        <Label for="email">Email</Label>
+        <TextField
+          width="225px"
+          id="email"
+          type="email"
+          autocomplete="email"
+          on-input={handleEmailInput}
+        />
+        <Label for="password">Password</Label>
+        <TextField
+          width="225px"
+          id="password"
+          name="password"
+          type="password"
+          autocomplete="current-password"
+          on-input={handlePasswordInput}
+        />
+        <Button width="245px" on-click={handleSignUp}>
+          Sign me up!
+        </Button>
+      </form>
+      <Link href="/#/signin">Just sign me in.</Link>
+    </Content>
   );
 };

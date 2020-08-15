@@ -1,8 +1,9 @@
 import Snabbdom from "snabbdom-pragma";
+import Content from "../components/Content";
 
 export default () => (
-  <section id="content" style={{ margin: "16px" }}>
+  <Content style={{ margin: "16px" }}>
     <h2>About</h2>
     <p>It's lists. What else do you want to know?</p>
-  </section>
+  </Content>
 );

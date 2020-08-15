@@ -1,10 +1,6 @@
 import Snabbdom from "snabbdom-pragma";
 import { signUp } from "../modules/api";
-import TextField from "../components/TextField";
-import Button from "../components/Button";
-import Link from "../components/Link";
-import Form from "../components/Form";
-import Content from "../components/Content";
+import { TextField, Button, Link, Form, Content } from "../components";
 
 export default () => {
   let state = { email: "", password: "" };

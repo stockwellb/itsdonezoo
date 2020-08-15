@@ -1,6 +1,6 @@
 import Snabbdom from "snabbdom-pragma";
 import { patch } from "../modules/vdom";
-import Content from "../components/Content";
+import { Content } from "../components";
 
 const Dashboard = () => {
   let state = { count: 0 };

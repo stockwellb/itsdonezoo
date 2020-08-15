@@ -1,5 +1,5 @@
 import Snabbdom from "snabbdom-pragma";
-import Content from "../components/Content";
+import { Content } from "../components";
 
 export default ({}, children) => (
   <Content style={{ margin: "16px" }}>

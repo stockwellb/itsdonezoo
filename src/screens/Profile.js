@@ -1,6 +1,6 @@
 import Snabbdom from "snabbdom-pragma";
 import { signOut } from "../modules/api";
-import Content from "../components/Content";
+import { Content } from "../components";
 
 const handleSignOut = () => {
   return signOut();

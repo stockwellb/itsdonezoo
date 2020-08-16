@@ -1,5 +1,6 @@
 import Snabbdom from "snabbdom-pragma";
 import { signUp } from "../modules/api";
+import { showErrorMessage, showMessage } from "../modules/error";
 import {
   TextField,
   Button,
@@ -31,7 +32,13 @@ export default () => {
   };
 
   const handleSignUp = () => {
-    return signUp(state.email, state.password);
+    return signUp(state.email, state.password)
+      .then(() => {
+        showMessage("Signed up successfully!", true);
+      })
+      .catch((e) => {
+        showErrorMessage(e.message);
+      });
   };
 
   return (

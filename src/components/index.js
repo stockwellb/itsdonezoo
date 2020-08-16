@@ -6,6 +6,7 @@ export { default as H2 } from "./H2";
 export { default as H5 } from "./H5";
 export { default as Label } from "./Label";
 export { default as ListItem } from "./ListItem";
+export { default as Message } from "./Message";
 export { default as Link } from "./Link";
 export { default as Nav } from "./Nav";
 export { default as Section } from "./Section";

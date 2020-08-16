@@ -6,5 +6,6 @@ export default ({}, children) => (
     <WelcomeHeader />
     <div id="nav"></div>
     <div id="content"></div>
+    <div id="message"></div>
   </section>
 );

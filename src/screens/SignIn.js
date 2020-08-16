@@ -8,6 +8,7 @@ import {
   Content,
   Label,
   H2,
+  Section,
 } from "../components";
 
 export default () => {
@@ -36,45 +37,32 @@ export default () => {
   return (
     <Content center style={{ margin: "16px" }}>
       <H2>Sign in to your {process.env.APP_TITLE} account.</H2>
-      <Form
-        center
-        style={{
-          marginBottom: "8px",
-        }}
-      >
-        <Label
-          style={{ alignSelf: "flex-start", marginLeft: "8px" }}
-          for="email"
-        >
+      <Form center>
+        <Label style={{ alignSelf: "flex-start" }} for="email">
           Email
         </Label>
         <TextField
-          width="225px"
           id="email"
           type="email"
           autocomplete="email"
           on-input={handleEmailInput}
         />
-        <Label
-          style={{ alignSelf: "flex-start", marginLeft: "8px" }}
-          for="password"
-        >
+        <Label style={{ alignSelf: "flex-start" }} for="password">
           Password
         </Label>
         <TextField
-          width="225px"
           id="password"
           name="password"
           type="password"
           autocomplete="current-password"
           on-input={handlePasswordInput}
         />
-        <Button width="245px" on-click={handleSignIn}>
-          Sign in
-        </Button>
+        <Button on-click={handleSignIn}>Sign in</Button>
       </Form>
-      <Link href="/#/forgot-password">I forgot my password</Link>
-      <Link href="/#/signup">I need an account!</Link>
+      <Section center>
+        <Link href="/#/forgot-password">I forgot my password</Link>
+        <Link href="/#/signup">I need an account!</Link>
+      </Section>
     </Content>
   );
 };

@@ -2,8 +2,9 @@ import Snabbdom from "snabbdom-pragma";
 
 export default ({ href, style, ...rest }, children) => {
   const baseStyle = {
+    display: "block",
     fontSize: "18px",
-    margin: "8px",
+    padding: "8px",
     color: `${process.env.DEFAULT_TEXT_COLOR}`,
     textDecoration: "none",
   };

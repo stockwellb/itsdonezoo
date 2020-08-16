@@ -5,22 +5,12 @@ export default ({ center, style, ...rest }, children) => {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    width: "100%",
-    maxWidth: "400px",
     padding: "16px",
   };
 
-  const baseStyle = {
-    border: "1px solid #dcdcdc",
-    padding: "8px",
-  };
-
   return (
-    <form
-      style={{ ...baseStyle, ...(center && centeredStyle), ...style }}
-      {...rest}
-    >
+    <div style={{ ...(center && centeredStyle), ...style }} {...rest}>
       {children}
-    </form>
+    </div>
   );
 };

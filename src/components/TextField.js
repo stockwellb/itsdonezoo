@@ -1,12 +1,13 @@
 import Snabbdom from "snabbdom-pragma";
 const EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
 
-export default ({ width, style, onInvalid, ...rest }, children) => {
+export default ({ style, onInvalid, ...rest }, children) => {
   const baseStyle = {
-    width: width || "50px",
+    boxSizing: "border-box",
     fontSize: "18px",
-    margin: "8px",
     padding: "8px",
+    width: "100%",
+
     color: `${process.env.DEFAULT_TEXT_COLOR}`,
   };
 

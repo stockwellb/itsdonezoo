@@ -1,19 +1,12 @@
 import Snabbdom from "snabbdom-pragma";
+import { Section } from ".";
 
-export default ({ center, style, ...rest }, children) => {
-  const centeredStyle = {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  };
+export default ({ style, ...rest }, children) => {
+  const baseStyle = {};
 
   return (
-    <div
-      id="content"
-      style={{ ...(center && centeredStyle), ...style }}
-      {...rest}
-    >
+    <Section id="content" style={{ ...baseStyle, ...style }} {...rest}>
       {children}
-    </div>
+    </Section>
   );
 };

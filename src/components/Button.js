@@ -9,8 +9,8 @@ export default ({ width, style, ...rest }, children) => {
     textAlign: "center",
     fontSize: "18px",
     padding: "8px",
-    margin: "8px",
-    width: width || "100px",
+    margin: "16px",
+    width: width || "150px",
     transition: "all 0.5s",
     cursor: "pointer",
   };

@@ -1,4 +1,5 @@
 import Snabbdom from "snabbdom-pragma";
+import { H1, H5 } from ".";
 
 export default ({}, children) => (
   <div
@@ -12,20 +13,20 @@ export default ({}, children) => (
       backgroundColor: `${process.env.PRIMARY_COLOR}`,
     }}
   >
-    <h1
+    <H1
       style={{
         color: `${process.env.PRIMARY_TEXT_COLOR}`,
       }}
     >
       {`${process.env.APP_TITLE}, ${process.env.APP_CALL_TO_ACTION}`}
-    </h1>
-    <h5
+    </H1>
+    <H5
       style={{
         marginTop: "0px",
         color: `${process.env.PRIMARY_TEXT_COLOR}`,
       }}
     >
       {process.env.APP_MORE_INFO}
-    </h5>
+    </H5>
   </div>
 );

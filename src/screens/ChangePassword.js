@@ -1,9 +1,9 @@
 import Snabbdom from "snabbdom-pragma";
-import { Content } from "../components";
+import { Content, H2 } from "../components";
 
 export default () => (
   <Content style={{ margin: "16px" }}>
-    <h2>Change Password</h2>
+    <H2>Change Password</H2>
     <p>Smart! Keep them hackers guessing.</p>
   </Content>
 );

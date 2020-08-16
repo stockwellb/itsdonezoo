@@ -1,6 +1,6 @@
 import Snabbdom from "snabbdom-pragma";
 import { signOut } from "../modules/api";
-import { Content, Link } from "../components";
+import { Content, Link, H2 } from "../components";
 
 const handleSignOut = () => {
   return signOut();
@@ -8,7 +8,7 @@ const handleSignOut = () => {
 
 export default () => (
   <Content style={{ margin: "16px" }}>
-    <h2>Profile</h2>
+    <H2>Profile</H2>
     <p>Some stuff about you should go here.</p>
     <ul>
       <li>

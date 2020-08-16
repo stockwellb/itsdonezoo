@@ -1,6 +1,14 @@
 import Snabbdom from "snabbdom-pragma";
 import { signUp } from "../modules/api";
-import { TextField, Button, Link, Form, Content, Label } from "../components";
+import {
+  TextField,
+  Button,
+  Link,
+  Form,
+  Content,
+  Label,
+  H2,
+} from "../components";
 
 export default () => {
   let state = { email: "", password: "" };
@@ -27,9 +35,9 @@ export default () => {
 
   return (
     <Content center style={{ margin: "16px" }}>
-      <h2 style={{ textAlign: "center" }}>
+      <H2 style={{ textAlign: "center" }}>
         Sign up for your {process.env.APP_TITLE} account.
-      </h2>
+      </H2>
       <Form
         center
         style={{

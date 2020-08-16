@@ -1,9 +1,9 @@
 import Snabbdom from "snabbdom-pragma";
-import { Content, Link } from "../components";
+import { Content, Link, H2 } from "../components";
 
 export default ({}, children) => (
   <Content style={{ margin: "16px" }}>
-    <h2>Lists</h2>
+    <H2>Lists</H2>
     <nav>
       <ul>
         <li>

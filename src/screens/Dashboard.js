@@ -1,6 +1,6 @@
 import Snabbdom from "snabbdom-pragma";
 import { patch } from "../modules/vdom";
-import { Content, Button } from "../components";
+import { Content, Button, H2 } from "../components";
 
 const Dashboard = () => {
   let state = { count: 0 };
@@ -25,7 +25,7 @@ const Dashboard = () => {
 
   return (
     <Content style={{ margin: "16px" }}>
-      <h2>Dashboard</h2>
+      <H2>Dashboard</H2>
       <p>
         Maybe some dashboard stuff could go here. Total number of lists, total
         number of uncompleted items or uncompleted lists. Whatever.

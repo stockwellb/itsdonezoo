@@ -27,7 +27,9 @@ export default () => {
 
   return (
     <Content center style={{ margin: "16px" }}>
-      <h2>Sign up for your {process.env.APP_TITLE} account.</h2>
+      <h2 style={{ textAlign: "center" }}>
+        Sign up for your {process.env.APP_TITLE} account.
+      </h2>
       <Form
         center
         style={{

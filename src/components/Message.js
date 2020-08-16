@@ -4,7 +4,7 @@ export default ({ error }, children) => {
   const rootStyle = {
     display: "flex",
     position: "fixed",
-    bottom: "0%",
+    bottom: 0,
     width: "100%",
     height: "48px",
   };
@@ -22,6 +22,7 @@ export default ({ error }, children) => {
 
   const messageStyle = {
     margin: 0,
+    fontSize: "18px",
     padding: "8px",
     textAlign: "center",
     color: "#006d00",

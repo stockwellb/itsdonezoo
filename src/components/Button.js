@@ -2,6 +2,7 @@ import Snabbdom from "snabbdom-pragma";
 
 export default ({ width, style, ...rest }, children) => {
   const baseStyle = {
+    minWidth: 64,
     backgroundColor: `${process.env.PRIMARY_COLOR}`,
     border: "4px double white",
     color: `${process.env.PRIMARY_TEXT_COLOR}`,

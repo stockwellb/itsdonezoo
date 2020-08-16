@@ -1,6 +1,6 @@
 import Snabbdom from "snabbdom-pragma";
 import { signUp } from "../modules/api";
-import { TextField, Button, Link, Form, Content } from "../components";
+import { TextField, Button, Link, Form, Content, Label } from "../components";
 
 export default () => {
   let state = { email: "", password: "" };
@@ -34,20 +34,30 @@ export default () => {
           marginBottom: "16px",
         }}
       >
+        <Label
+          style={{ alignSelf: "flex-start", marginLeft: "8px" }}
+          for="email"
+        >
+          Email
+        </Label>
         <TextField
           width="225px"
           id="email"
           type="email"
           autocomplete="email"
-          placeholder="Email"
           on-input={handleEmailInput}
         />
+        <Label
+          style={{ alignSelf: "flex-start", marginLeft: "8px" }}
+          for="email"
+        >
+          Password
+        </Label>
         <TextField
           width="225px"
           id="password"
           name="password"
           type="password"
-          placeholder="Password"
           autocomplete="current-password"
           on-input={handlePasswordInput}
         />

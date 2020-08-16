@@ -5,7 +5,7 @@ export default ({ style, ...rest }, children) => {
   };
 
   return (
-    <label style={{ ...baseStyle, style }} {...rest}>
+    <label style={{ ...baseStyle, ...style }} {...rest}>
       {children}
     </label>
   );

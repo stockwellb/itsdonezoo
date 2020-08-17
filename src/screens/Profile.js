@@ -1,9 +1,12 @@
 import Snabbdom from "snabbdom-pragma";
 import { signOut } from "../modules/api";
 import { Content, Link, H2 } from "../components";
+import { showMessage, showErrorMessage } from "../modules/error";
 
 const handleSignOut = () => {
-  return signOut();
+  return signOut()
+    .then(() => showMessage("You've been signed out!", true))
+    .catch((e) => showErrorMessage(e.message, true));
 };
 
 export default () => (

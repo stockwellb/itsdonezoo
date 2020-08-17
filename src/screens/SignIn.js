@@ -37,7 +37,7 @@ export default () => {
         showMessage("Signed in successfully!", true);
       })
       .catch((e) => {
-        showErrorMessage(e.message);
+        showErrorMessage(e.message, true);
       });
   };
 

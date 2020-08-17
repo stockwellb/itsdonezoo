@@ -34,9 +34,7 @@ export default ({ error, blank }, children) => {
     color: "#e80000",
   };
 
-  const hooks = {};
-
-  const slug = <div style={rootStyle} id={id}></div>;
+  const slug = <div id={id}></div>;
 
   const message = (
     <div id={id} style={rootStyle}>

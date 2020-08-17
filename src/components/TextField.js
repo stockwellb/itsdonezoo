@@ -6,12 +6,14 @@ export default ({ style, onInvalid, ...rest }, children) => {
     boxSizing: "border-box",
     fontSize: "18px",
     padding: "8px",
+    margin: "4px",
     width: "100%",
 
     color: `${process.env.DEFAULT_TEXT_COLOR}`,
   };
 
   const overRideStyle = {
+    borderRadius: "4px",
     border: `1px solid #dcdcdc`,
   };
 

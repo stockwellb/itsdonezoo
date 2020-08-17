@@ -11,6 +11,7 @@ export default ({ center, style, ...rest }, children) => {
   };
 
   const baseStyle = {
+    borderRadius: "4px",
     border: "1px solid #dcdcdc",
     padding: "8px",
   };

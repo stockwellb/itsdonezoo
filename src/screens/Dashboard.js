@@ -15,10 +15,10 @@ const Dashboard = () => {
     patch(vnode, view(state.count));
   };
 
-  const view = (count) => {
+  const view = (value) => {
     return (
       <Button id="dashboard_button" on-click={handleClick}>
-        {count}
+        {value}
       </Button>
     );
   };
@@ -30,9 +30,7 @@ const Dashboard = () => {
         Maybe some dashboard stuff could go here. Total number of lists, total
         number of uncompleted items or uncompleted lists. Whatever.
       </p>
-      <Button id="dashboard_button" on-click={handleClick}>
-        Click me
-      </Button>
+      {view("Press me")}
     </Content>
   );
 };

@@ -64,7 +64,9 @@ export default () => {
           autocomplete="current-password"
           on-input={handlePasswordInput}
         />
-        <Button on-click={handleSignUp}>Sign me up!</Button>
+        <Button primary on-click={handleSignUp}>
+          Sign me up!
+        </Button>
       </Form>
       <Section center>
         <Link href="/#/signin">Just sign me in.</Link>

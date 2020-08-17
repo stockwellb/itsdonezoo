@@ -4,7 +4,7 @@ export default ({ href, style, ...rest }, children) => {
   const baseStyle = {
     display: "block",
     fontSize: "18px",
-    padding: "8px",
+    margin: "4px",
     color: `${process.env.DEFAULT_TEXT_COLOR}`,
     textDecoration: "none",
   };

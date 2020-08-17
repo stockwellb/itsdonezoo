@@ -1,6 +1,6 @@
 import Snabbdom from "snabbdom-pragma";
 import { signOut } from "../modules/api";
-import { Content, Link, H2 } from "../components";
+import { Content, Link, H2, P, ListItem } from "../components";
 import { showMessage, showErrorMessage } from "../modules/error";
 import theme from "../theme";
 
@@ -13,16 +13,16 @@ const handleSignOut = () => {
 const themeComponent = (theme) => () => (
   <Content style={{ margin: "16px" }}>
     <H2>Profile</H2>
-    <p>Some stuff about you should go here.</p>
+    <P>Some stuff about you should go here.</P>
     <ul>
-      <li>
+      <ListItem>
         <Link href="#" on-click={handleSignOut}>
           Sign out
         </Link>
-      </li>
-      <li>
+      </ListItem>
+      <ListItem>
         <Link href="/#/change-password">Change password</Link>
-      </li>
+      </ListItem>
     </ul>
   </Content>
 );

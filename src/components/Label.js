@@ -1,8 +1,10 @@
 import Snabbdom from "snabbdom-pragma";
-export default ({ style, ...rest }, children) => {
+import theme from "../theme";
+
+const themeComponent = (theme) => ({ style, ...rest }, children) => {
   const baseStyle = {
-    fontSize: "18px",
-    margin: "4px",
+    fontSize: theme.typography.fontSize,
+    margin: theme.spacing(1),
     marginLeft: 0,
   };
 
@@ -12,3 +14,5 @@ export default ({ style, ...rest }, children) => {
     </label>
   );
 };
+
+export default (() => themeComponent(theme))();

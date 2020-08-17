@@ -1,6 +1,7 @@
 import Snabbdom from "snabbdom-pragma";
+import theme from "../theme";
 
-export default ({ error, blank }, children) => {
+const themeComponent = (theme) => ({ error, blank }, children) => {
   const id = "message";
 
   const rootStyle = {
@@ -8,30 +9,30 @@ export default ({ error, blank }, children) => {
     position: "fixed",
     bottom: "0px",
     width: "100%",
-    height: "48px",
+    height: theme.spacing(12),
   };
   const containerStyle = {
     width: "100%",
-    margin: "4px",
-    backgroundColor: "#d4f4c9",
-    border: "1px solid #70b060",
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.success.main,
+    border: `1px solid ${theme.palette.success.border}`,
   };
 
   const errorContainerStye = {
-    backgroundColor: "#ffded3",
-    border: "1px solid #ff9a7f",
+    backgroundColor: theme.palette.error.main,
+    border: `1px solid ${theme.palette.error.border}`,
   };
 
   const messageStyle = {
     margin: 0,
-    fontSize: "18px",
-    padding: "8px",
+    fontSize: theme.typography.fontSize,
+    padding: theme.spacing(2),
     textAlign: "center",
-    color: "#006d00",
+    color: theme.palette.success.contrastText,
   };
 
   const errorMessageStyle = {
-    color: "#e80000",
+    color: theme.palette.error.contrastText,
   };
 
   const slug = <div id={id}></div>;
@@ -48,3 +49,5 @@ export default ({ error, blank }, children) => {
 
   return blank ? slug : message;
 };
+
+export default (() => themeComponent(theme))();

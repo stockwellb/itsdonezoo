@@ -1,11 +1,12 @@
 import Snabbdom from "snabbdom-pragma";
+import theme from "../theme";
 
-export default ({ href, style, ...rest }, children) => {
+const themeComponent = (theme) => ({ href, style, ...rest }, children) => {
   const baseStyle = {
     display: "block",
-    fontSize: "18px",
-    margin: "4px",
-    color: `${process.env.DEFAULT_TEXT_COLOR}`,
+    fontSize: theme.typography.fontSize,
+    margin: theme.spacing(1),
+    color: theme.palette.default.contrastText,
     textDecoration: "none",
   };
 
@@ -15,3 +16,5 @@ export default ({ href, style, ...rest }, children) => {
     </a>
   );
 };
+
+export default (() => themeComponent(theme))();

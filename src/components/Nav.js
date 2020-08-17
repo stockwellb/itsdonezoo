@@ -1,26 +1,27 @@
 import Snabbdom from "snabbdom-pragma";
+import theme from "../theme";
 
 const liStyle = {
-  margin: "18px",
+  margin: theme.typography.fontSize,
   display: "block",
   flex: "0 1 auto",
   listStyleType: "none",
 };
 
 const tagStyle = {
-  color: `${process.env.PRIMARY_TEXT_COLOR}`,
+  color: theme.palette.primary.contrastText,
   textDecoration: "none",
   "&:hover": {
-    color: `${process.env.SECONDARY_COLOR}`,
+    color: theme.palette.secondary.main,
   },
 };
 
 const navStyle = {
-  backgroundColor: `${process.env.PRIMARY_DARK_COLOR}`,
-  borderTop: `3px solid ${process.env.PRIMARY_DARK_TEXT_COLOR}`,
+  backgroundColor: theme.palette.secondary.main,
+  borderTop: `3px solid ${theme.palette.primary.contrastText}`,
 };
 
-export default ({}, children) => (
+const themeComponent = (theme) => ({}, children) => (
   <nav id="nav" style={navStyle}>
     <ul
       style={{
@@ -54,3 +55,5 @@ export default ({}, children) => (
     </ul>
   </nav>
 );
+
+export default (() => themeComponent(theme))();

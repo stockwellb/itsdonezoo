@@ -1,7 +1,8 @@
 import Snabbdom from "snabbdom-pragma";
 import { Content, Link, H2, ListItem } from "../components";
+import theme from "../theme";
 
-export default ({}, children) => (
+const themeComponent = (theme) => ({}, children) => (
   <Content style={{ margin: "16px" }}>
     <H2>Lists</H2>
     <nav>
@@ -16,3 +17,5 @@ export default ({}, children) => (
     </nav>
   </Content>
 );
+
+export default (() => themeComponent(theme))();

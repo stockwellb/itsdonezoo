@@ -1,11 +1,12 @@
 import Snabbdom from "snabbdom-pragma";
+import theme from "../theme";
 
-export default ({ center, style, ...rest }, children) => {
+const themeComponent = (theme) => ({ center, style, ...rest }, children) => {
   const centeredStyle = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    padding: "16px",
+    padding: theme.spacing(4),
   };
 
   return (
@@ -14,3 +15,5 @@ export default ({ center, style, ...rest }, children) => {
     </div>
   );
 };
+
+export default (() => themeComponent(theme))();

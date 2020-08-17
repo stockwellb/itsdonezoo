@@ -1,20 +1,21 @@
 import Snabbdom from "snabbdom-pragma";
 const EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
+import theme from "../theme";
 
-export default ({ style, onInvalid, ...rest }, children) => {
+const themeComponent = (theme) => ({ style, onInvalid, ...rest }, children) => {
   const baseStyle = {
     boxSizing: "border-box",
-    fontSize: "18px",
-    padding: "8px",
-    margin: "4px",
+    fontSize: theme.typography.fontSize,
+    padding: theme.spacing(2),
+    margin: theme.spacing(1),
     width: "100%",
 
-    color: `${process.env.DEFAULT_TEXT_COLOR}`,
+    color: theme.palette.default.contrastText,
   };
 
   const overRideStyle = {
-    borderRadius: "4px",
-    border: `1px solid #dcdcdc`,
+    borderRadius: theme.spacing(1),
+    border: `1px solid ${theme.palette.default.border}`,
   };
 
   // **** save this for later
@@ -30,12 +31,14 @@ export default ({ style, onInvalid, ...rest }, children) => {
   // };
 
   const handleFocus = (e) =>
-    (e.target.style.border = `1px solid ${process.env.PRIMARY_DARK_COLOR}`);
+    (e.target.style.border = `1px solid ${theme.palette.secondary.main}`);
 
   const handleBlur = (e) => {
     let valid;
     valid = e.target.reportValidity();
-    e.target.style.border = valid ? `1px solid #dcdcdc` : `1px solid #e80000`;
+    e.target.style.border = valid
+      ? `1px solid ${theme.palette.default.border}`
+      : `1px solid ${theme.palette.error.contrastText}`;
     e.target.checkValidity();
   };
   const handleInvalid = (e) => {
@@ -54,3 +57,5 @@ export default ({ style, onInvalid, ...rest }, children) => {
     </input>
   );
 };
+
+export default (() => themeComponent(theme))();

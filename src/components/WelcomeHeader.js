@@ -1,7 +1,8 @@
 import Snabbdom from "snabbdom-pragma";
 import { H1, H5 } from ".";
+import theme from "../theme";
 
-export default ({}, children) => (
+const themeComponent = (theme) => ({}, children) => (
   <div
     id="header"
     style={{
@@ -10,12 +11,12 @@ export default ({}, children) => (
       alignItems: "center",
       margin: "0px",
       padding: "16px",
-      backgroundColor: `${process.env.PRIMARY_COLOR}`,
+      backgroundColor: theme.palette.primary.main,
     }}
   >
     <H1
       style={{
-        color: `${process.env.PRIMARY_TEXT_COLOR}`,
+        color: theme.palette.primary.contrastText,
       }}
     >
       {`${process.env.APP_TITLE}, ${process.env.APP_CALL_TO_ACTION}`}
@@ -23,10 +24,12 @@ export default ({}, children) => (
     <H5
       style={{
         marginTop: "0px",
-        color: `${process.env.PRIMARY_TEXT_COLOR}`,
+        color: theme.palette.primary.contrastText,
       }}
     >
       {process.env.APP_MORE_INFO}
     </H5>
   </div>
 );
+
+export default (() => themeComponent(theme))();

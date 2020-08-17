@@ -5,7 +5,6 @@ import queryString from "query-string";
 export default (id, isAuth, defaultPath, signInPath) => {
   const view = (path, state) => {
     const authenticated = isAuth();
-    console.log("route", path, state, authenticated);
     const route = routes[path];
 
     if (!route) {

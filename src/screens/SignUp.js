@@ -11,8 +11,9 @@ import {
   H2,
   Section,
 } from "../components";
+import theme from "../theme";
 
-export default () => {
+const themeComponent = (theme) => () => {
   let state = { email: "", password: "" };
 
   const setState = (newState) => {
@@ -42,7 +43,7 @@ export default () => {
   };
 
   return (
-    <Content center style={{ margin: "16px" }}>
+    <Content center style={{ margin: theme.spacing(4) }}>
       <H2>Sign up for your {process.env.APP_TITLE} account.</H2>
       <Form center>
         <Label style={{ alignSelf: "flex-start" }} for="email">
@@ -74,3 +75,5 @@ export default () => {
     </Content>
   );
 };
+
+export default (() => themeComponent(theme))();

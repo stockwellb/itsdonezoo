@@ -3,6 +3,7 @@ import { classModule } from "snabbdom/build/package/modules/class";
 import { propsModule } from "snabbdom/build/package/modules/props";
 import { styleModule } from "snabbdom/build/package/modules/style";
 import { eventListenersModule } from "snabbdom/build/package/modules/eventlisteners";
+export { toVNode } from "snabbdom/build/package/toVNode";
 
 export const patch = init([
   classModule,

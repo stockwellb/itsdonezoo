@@ -34,7 +34,7 @@ export default () => {
   const handleSignUp = () => {
     return signUp(state.email, state.password)
       .then(() => {
-        showMessage("Signed up successfully!", true);
+        showMessage("Signed up successfully!");
       })
       .catch((e) => {
         showErrorMessage(e.message);

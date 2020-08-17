@@ -34,10 +34,10 @@ export default () => {
   const handleSignIn = () => {
     return signIn(state.email, state.password)
       .then(() => {
-        showMessage("Signed in successfully!", true);
+        showMessage("Signed in successfully!");
       })
       .catch((e) => {
-        showErrorMessage(e.message, true);
+        showErrorMessage(e.message);
       });
   };
 

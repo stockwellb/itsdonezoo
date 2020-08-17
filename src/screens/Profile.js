@@ -6,7 +6,7 @@ import { showMessage, showErrorMessage } from "../modules/error";
 const handleSignOut = () => {
   return signOut()
     .then(() => showMessage("You've been signed out!", true))
-    .catch((e) => showErrorMessage(e.message, true));
+    .catch((e) => showErrorMessage(e.message));
 };
 
 export default () => (

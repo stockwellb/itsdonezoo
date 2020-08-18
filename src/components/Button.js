@@ -22,8 +22,24 @@ const themeComponent = (theme) => (
     cursor: "pointer",
   };
 
+  const handleMouseEnter = (e) => {
+    e.target.style.backgroundColor = primary
+      ? theme.palette.primary.light
+      : theme.palette.default.light;
+  };
+
+  const handleMouseLeave = (e) => {
+    e.target.style.backgroundColor = primary ? theme.palette.primary.main : "";
+  };
+
   return (
-    <button type="button" style={{ ...baseStyle, ...style }} {...rest}>
+    <button
+      type="button"
+      style={{ ...baseStyle, ...style }}
+      {...rest}
+      on-mouseenter={handleMouseEnter}
+      on-mouseleave={handleMouseLeave}
+    >
       {children}
     </button>
   );

@@ -11,11 +11,6 @@ export default (id, routes, isAuth, defaultPath, signInPath) => {
   const view = (path, state) => {
     const authenticated = isAuth();
     const route = routes[path];
-    console.log("view", path, state);
-    if (path.length === 0) {
-      console.log(`no path, ignoring routing request`);
-      return null;
-    }
 
     if (!route) {
       console.log(`no route, rerouting to ${defaultPath}`);

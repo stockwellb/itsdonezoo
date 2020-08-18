@@ -16,10 +16,18 @@ body {
 }
 
 input {
-  border: "1px solid #8510d8";
+  border: none;
 }
 
 input:focus {
   outline: none;
-  border: "2px solid #8510d8";
+  border: none;
+}
+
+button {
+  border: none;
+}
+
+button:focus {
+  border: none;
 }

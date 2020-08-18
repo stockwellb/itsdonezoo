@@ -12,12 +12,12 @@ const tagStyle = {
   color: theme.palette.primary.contrastText,
   textDecoration: "none",
   "&:hover": {
-    color: theme.palette.secondary.main,
+    color: theme.palette.primary.dark,
   },
 };
 
 const navStyle = {
-  backgroundColor: theme.palette.secondary.main,
+  backgroundColor: theme.palette.primary.dark,
   borderTop: `3px solid ${theme.palette.primary.contrastText}`,
 };
 

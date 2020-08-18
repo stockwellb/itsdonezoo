@@ -30,8 +30,10 @@ const themeComponent = (theme) => ({ style, onInvalid, ...rest }, children) => {
   //   return valid;
   // };
 
-  const handleFocus = (e) =>
-    (e.target.style.border = `1px solid ${theme.palette.secondary.main}`);
+  const handleFocus = (e) => {
+    e.target.style.border = `1px solid ${theme.palette.primary.light}`;
+    e.target.style.boxShadow = `0 0 2px 0px ${theme.palette.primary.light}`;
+  };
 
   const handleBlur = (e) => {
     let valid;
@@ -39,6 +41,7 @@ const themeComponent = (theme) => ({ style, onInvalid, ...rest }, children) => {
     e.target.style.border = valid
       ? `1px solid ${theme.palette.default.border}`
       : `1px solid ${theme.palette.error.contrastText}`;
+    e.target.style.boxShadow = "none";
     e.target.checkValidity();
   };
   const handleInvalid = (e) => {

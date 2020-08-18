@@ -25,7 +25,7 @@ patch(vnode, <App />);
 
 auth().onAuthStateChanged((user) => {
   const vnode = document.getElementById(NAV_LOCATOR);
-  console.log("auth state changed.", user);
+  console.log("auth state changed.", !!user);
   if (user) {
     localStorage.setItem(STORAGE_LOCATION, "1");
     patch(vnode, <Nav />);

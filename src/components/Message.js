@@ -28,7 +28,7 @@ const themeComponent = (theme) => ({ error, blank }, children) => {
   };
 
   const messageStyle = {
-    margin: 0,
+    margin: "0px",
     padding: theme.spacing(2),
     textAlign: "center",
     color: theme.palette.success.contrastText,

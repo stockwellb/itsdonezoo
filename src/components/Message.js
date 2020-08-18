@@ -22,7 +22,7 @@ const themeComponent = (theme) => ({ error, blank }, children) => {
     border: `1px solid ${theme.palette.success.border}`,
   };
 
-  const errorContainerStye = {
+  const errorContainerStyle = {
     backgroundColor: theme.palette.error.main,
     border: `1px solid ${theme.palette.error.border}`,
   };
@@ -42,7 +42,7 @@ const themeComponent = (theme) => ({ error, blank }, children) => {
 
   const message = (
     <div id={id} style={rootStyle}>
-      <div style={{ ...containerStyle, ...(error && errorContainerStye) }}>
+      <div style={{ ...containerStyle, ...(error && errorContainerStyle) }}>
         <P style={{ ...messageStyle, ...(error && errorMessageStyle) }}>
           {children}
         </P>

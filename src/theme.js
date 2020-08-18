@@ -1,5 +1,5 @@
 export default {
-  spacing: (value) => `${value * 4}px`,
+  spacing: (m) => `${m * 4}px`,
   typography: {
     fontSize: "18px",
   },

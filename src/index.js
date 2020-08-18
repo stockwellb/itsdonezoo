@@ -5,6 +5,7 @@ import App from "./App";
 import Nav from "./components/Nav";
 import routerInit from "./modules/router";
 import { auth } from "./modules/firebase";
+import { routes } from "./modules/routes";
 
 const DASHBOARD = "/dashboard";
 const SIGNIN = "/signin";
@@ -17,7 +18,7 @@ const NAV_LOCATOR = "nav";
 const isAuth = () =>
   auth().currentUser !== null || localStorage.getItem(STORAGE_LOCATION) === "1";
 
-routerInit(CONTENT_LOCATOR, isAuth, DASHBOARD, SIGNIN);
+routerInit(CONTENT_LOCATOR, routes, isAuth, DASHBOARD, SIGNIN);
 
 const vnode = document.getElementById(ROOT_LOCATOR);
 patch(vnode, <App />);

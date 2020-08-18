@@ -1,8 +1,13 @@
-import { routes } from "./routes";
+import Snabbdom from "snabbdom-pragma";
 import { patch } from "./vdom";
 import queryString from "query-string";
 
-export default (id, isAuth, defaultPath, signInPath) => {
+export const buildRoute = (Component, publicRoute) => ({
+  getComponent: (params) => <Component {...params} />,
+  public: publicRoute,
+});
+
+export default (id, routes, isAuth, defaultPath, signInPath) => {
   const view = (path, state) => {
     const authenticated = isAuth();
     const route = routes[path];
@@ -19,7 +24,7 @@ export default (id, isAuth, defaultPath, signInPath) => {
       return null;
     }
 
-    return route.f(state);
+    return route.getComponent(state);
   };
 
   const render = (path, state) => {

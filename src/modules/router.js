@@ -41,6 +41,7 @@ export default (id, routes, isAuth, defaultPath, signInPath) => {
   };
 
   document.addEventListener("DOMContentLoaded", (event) => {
+    console.log("dom ready", location.hash || location);
     if (!location.hash) {
       return;
     }
@@ -49,6 +50,7 @@ export default (id, routes, isAuth, defaultPath, signInPath) => {
   });
 
   onpopstate = () => {
+    console.log("pop state", location.hash || location);
     if (!location.hash) {
       return;
     }

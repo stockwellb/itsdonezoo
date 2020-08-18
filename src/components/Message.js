@@ -1,5 +1,6 @@
 import Snabbdom from "snabbdom-pragma";
 import theme from "../theme";
+import { P } from "../components";
 
 const themeComponent = (theme) => ({ error, blank }, children) => {
   const id = "message";
@@ -9,12 +10,15 @@ const themeComponent = (theme) => ({ error, blank }, children) => {
     position: "fixed",
     bottom: "0px",
     width: "100%",
-    height: theme.spacing(12),
   };
   const containerStyle = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
     width: "100%",
     margin: theme.spacing(1),
     backgroundColor: theme.palette.success.main,
+    borderRadius: theme.spacing(1),
     border: `1px solid ${theme.palette.success.border}`,
   };
 
@@ -25,7 +29,6 @@ const themeComponent = (theme) => ({ error, blank }, children) => {
 
   const messageStyle = {
     margin: 0,
-    fontSize: theme.typography.fontSize,
     padding: theme.spacing(2),
     textAlign: "center",
     color: theme.palette.success.contrastText,
@@ -40,9 +43,9 @@ const themeComponent = (theme) => ({ error, blank }, children) => {
   const message = (
     <div id={id} style={rootStyle}>
       <div style={{ ...containerStyle, ...(error && errorContainerStye) }}>
-        <p style={{ ...messageStyle, ...(error && errorMessageStyle) }}>
+        <P style={{ ...messageStyle, ...(error && errorMessageStyle) }}>
           {children}
-        </p>
+        </P>
       </div>
     </div>
   );

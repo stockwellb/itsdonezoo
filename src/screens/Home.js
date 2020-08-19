@@ -1,12 +1,13 @@
 import Snabbdom from "snabbdom-pragma";
 import { patch } from "../modules/vdom";
-import { Content, Section, H2, H3, P } from "../components";
+import { Content, H2, H3, P } from "../components";
 import {
   getHomePage,
   saveHomePage,
   getCurrentUser,
   getCurrentTimestamp,
 } from "../modules/api";
+import { BarsIcon } from "../modules/icons";
 
 const Home = () => {
   let state = { subscription: null, data: null };
@@ -74,12 +75,20 @@ const Home = () => {
           .sort((a, b) => (a.created > b.created ? 1 : -1))
           .map((section) => {
             return (
-              <H3
-                on-blur={handleSectionBlur(section, "title")}
-                contentEditable="true"
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                }}
               >
-                {section.title}
-              </H3>
+                <BarsIcon height="16px" width="16px" />
+                <H3
+                  on-blur={handleSectionBlur(section, "title")}
+                  contentEditable="true"
+                >
+                  {section.title}
+                </H3>
+              </div>
             );
           })}
       </div>

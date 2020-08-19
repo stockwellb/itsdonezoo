@@ -49,6 +49,9 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.11.2",
+    "@fortawesome/fontawesome-svg-core": "^1.2.30",
+    "@fortawesome/free-regular-svg-icons": "^5.14.0",
+    "@fortawesome/free-solid-svg-icons": "^5.14.0",
     "firebase": "^7.17.2",
     "query-string": "^6.13.1",
     "snabbdom": "^1.0.1"

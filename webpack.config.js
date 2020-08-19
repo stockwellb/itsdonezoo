@@ -32,6 +32,12 @@ module.exports = {
                 "@babel/plugin-transform-react-jsx",
                 { pragma: "Snabbdom.createElement" },
               ],
+              [
+                "@babel/plugin-transform-runtime",
+                {
+                  regenerator: true,
+                },
+              ],
             ],
           },
         },

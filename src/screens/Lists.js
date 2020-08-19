@@ -4,7 +4,8 @@ import theme from "../theme";
 import { getLists } from "../modules/api";
 
 const themeComponent = (theme) => ({}, children) => {
-  const lists = getLists();
+  const state = { lists: getLists() };
+  const { lists } = state;
 
   return (
     <Content style={{ margin: "16px" }}>

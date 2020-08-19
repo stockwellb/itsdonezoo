@@ -1,8 +1,12 @@
 import Snabbdom from "snabbdom-pragma";
 
-export default ({ style }, children) => {
+export default ({ style, ...rest }, children) => {
   const baseStyle = {
     textAlign: "center",
   };
-  return <h2 style={{ ...baseStyle, ...style }}>{children}</h2>;
+  return (
+    <h2 style={{ ...baseStyle, ...style }} {...rest}>
+      {children}
+    </h2>
+  );
 };

@@ -1,6 +1,10 @@
 import Snabbdom from "snabbdom-pragma";
 
-export default ({ style }, children) => {
+export default ({ style, ...rest }, children) => {
   const baseStyle = {};
-  return <h5 style={{ ...baseStyle, ...style }}>{children}</h5>;
+  return (
+    <h5 style={{ ...baseStyle, ...style }} {...rest}>
+      {children}
+    </h5>
+  );
 };

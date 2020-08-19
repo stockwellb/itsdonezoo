@@ -31,3 +31,14 @@ button {
 button:focus {
   border: none;
 }
+
+[contenteditable="true"]:active,
+[contenteditable="true"]:focus {
+  border: none;
+  outline: none;
+}
+
+[contenteditable="true"]:focus {
+  padding-bottom: 4px;
+  border-bottom: 1px solid #dcdcdc;
+}

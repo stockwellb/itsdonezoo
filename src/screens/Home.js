@@ -1,25 +1,27 @@
 import Snabbdom from "snabbdom-pragma";
 import { patch } from "../modules/vdom";
 import { Content, Section, H2, H3, P } from "../components";
-import { getHomePage, getCurrentUser } from "../modules/api";
+import {
+  getHomePage,
+  saveHomePage,
+  getCurrentUser,
+  getCurrentTimestamp,
+} from "../modules/api";
 
 const Home = () => {
-  let state = {};
+  let state = { subscription: null, data: null };
 
   const setState = (newState) => {
     state = { ...state, ...newState };
   };
 
-  const next = (doc) => {
+  const next = (snapshot) => {
     const vnode = document.getElementById("content");
-    console.log("document", doc.exists);
-    if (!doc.exists) {
+    if (!snapshot.exists) {
       return;
     }
-    const data = doc.data();
-    console.log("data", data);
-    setState(data);
-    patch(vnode, view(state));
+    setState({ data: snapshot.data() });
+    patch(vnode, view(state.data));
   };
 
   const error = (error) => {
@@ -28,16 +30,43 @@ const Home = () => {
 
   getCurrentUser().then((user) => {
     const subscription = getHomePage(user.uid, next, error);
+    setState({ subscription });
   });
+
+  const handleBlur = (section, field) => (e) => {
+    const oldSection = state.data.sections.find(
+      (x) => x.title === section.title
+    );
+    const newSection = {
+      ...oldSection,
+      [field]: e.target.textContent,
+      edited: Math.floor(Date.now()),
+    };
+    const sections = [
+      ...state.data.sections.filter((x) => x.title !== oldSection.title),
+      newSection,
+    ];
+    state.data.sections = sections;
+
+    getCurrentUser().then((user) => {
+      saveHomePage(user.uid, state.data);
+    });
+  };
 
   const view = (doc) => (
     <Content style={{ margin: "16px" }}>
       <H2>{doc.title}</H2>
       <P>{doc.caption}</P>
       <div>
-        {doc.sections.map((section) => {
-          return <H3>{section.title}</H3>;
-        })}
+        {doc.sections
+          .sort((a, b) => (a.created > b.created ? 1 : -1))
+          .map((section) => {
+            return (
+              <H3 on-blur={handleBlur(section, "title")} contentEditable="true">
+                {section.title}
+              </H3>
+            );
+          })}
       </div>
     </Content>
   );

@@ -1,9 +1,7 @@
 import Snabbdom from "snabbdom-pragma";
-import Dashboard from "../screens/Dashboard";
+import Home from "../screens/Home";
 import About from "../screens/About";
 import Profile from "../screens/Profile";
-import Lists from "../screens/Lists";
-import List from "../screens/List";
 import SignIn from "../screens/SignIn";
 import SignUp from "../screens/SignUp";
 import ChangePassword from "../screens/ChangePassword";
@@ -12,11 +10,9 @@ import { buildRoute } from "../modules/router";
 
 export const routes = {
   // private routes
-  dashboard: buildRoute(Dashboard, false),
+  home: buildRoute(Home, false),
   about: buildRoute(About, false),
   profile: buildRoute(Profile, false),
-  lists: buildRoute(Lists, false),
-  list: buildRoute(List, false),
   "change-password": buildRoute(ChangePassword, false),
   // public routes
   "forgot-password": buildRoute(ForgotPassword, true),

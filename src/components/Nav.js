@@ -33,18 +33,13 @@ const themeComponent = (theme) => ({}, children) => (
       }}
     >
       <li style={liStyle}>
-        <a href="/#/dashboard" style={tagStyle}>
-          Dashboard
+        <a href="/#/home" style={tagStyle}>
+          Home
         </a>
       </li>
       <li style={liStyle}>
         <a href="/#/profile" style={tagStyle}>
           Profile
-        </a>
-      </li>
-      <li style={liStyle}>
-        <a href="/#/lists" style={tagStyle}>
-          Lists
         </a>
       </li>
       <li style={liStyle}>

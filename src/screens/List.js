@@ -15,11 +15,14 @@ const themeComponent = (theme) => ({ id }) => {
 
   const view = (list) => {
     return (
-      <ul id="list">
-        {list.items.map((list) => (
-          <ListItem>{list.title}</ListItem>
-        ))}
-      </ul>
+      <figure id="list">
+        <figcaption>{list.title}</figcaption>
+        <ul id="list">
+          {list.items.map((list) => (
+            <ListItem>{list.title}</ListItem>
+          ))}
+        </ul>
+      </figure>
     );
   };
 
@@ -31,8 +34,7 @@ const themeComponent = (theme) => ({ id }) => {
 
   return (
     <Content style={{ margin: theme.spacing(4) }}>
-      <H2>List</H2>
-      <ul id="list"></ul>
+      <figure id="list"></figure>
     </Content>
   );
 };

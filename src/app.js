@@ -7,5 +7,6 @@ export default ({}, children) => (
     <div id="nav"></div>
     <div id="content"></div>
     <div id="message"></div>
+    <div id="modal"></div>
   </section>
 );

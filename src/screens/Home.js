@@ -1,15 +1,11 @@
 import Snabbdom from "snabbdom-pragma";
+import theme from "../theme";
 import { patch } from "../modules/vdom";
 import { Content, H2, H3, P } from "../components";
-import {
-  getHomePage,
-  saveHomePage,
-  getCurrentUser,
-  getCurrentTimestamp,
-} from "../modules/api";
-import { BarsIcon } from "../modules/icons";
+import { getHomePage, saveHomePage, getCurrentUser } from "../modules/api";
+import { Icon, ellipsisVertical } from "../modules/icons";
 
-const Home = () => {
+const themeComponent = (theme) => () => {
   let state = { subscription: null, data: null };
 
   const setState = (newState) => {
@@ -63,7 +59,7 @@ const Home = () => {
   };
 
   const view = (doc) => (
-    <Content style={{ margin: "16px" }}>
+    <Content style={{ margin: theme.spacing(4) }}>
       <H2 on-blur={handleRootBlur("title")} contentEditable="true">
         {doc.title}
       </H2>
@@ -81,7 +77,10 @@ const Home = () => {
                   alignItems: "center",
                 }}
               >
-                <BarsIcon height="16px" width="16px" />
+                <Icon
+                  style={{ fill: theme.palette.default.contrastText }}
+                  icon={ellipsisVertical}
+                />
                 <H3
                   on-blur={handleSectionBlur(section, "title")}
                   contentEditable="true"
@@ -96,4 +95,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default (() => themeComponent(theme))();

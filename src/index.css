@@ -39,6 +39,5 @@ button:focus {
 }
 
 [contenteditable="true"]:focus {
-  padding-bottom: 4px;
   border-bottom: 1px solid #dcdcdc;
 }

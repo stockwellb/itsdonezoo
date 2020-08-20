@@ -3,7 +3,7 @@ import theme from "../theme";
 import { patch } from "../modules/vdom";
 import { Content, H2, H3, P } from "../components";
 import { getHomePage, saveHomePage, getCurrentUser } from "../modules/api";
-import { Icon, ellipsisVertical } from "../modules/icons";
+import { Icon, ellipsisVertical, plusSquare } from "../modules/icons";
 
 const themeComponent = (theme) => () => {
   let state = { subscription: null, data: null };
@@ -14,7 +14,7 @@ const themeComponent = (theme) => () => {
   };
 
   const next = (snapshot) => {
-    vnode = vnode || document.getElementById("content");
+    vnode = document.getElementById("content");
     if (!snapshot.exists) {
       return;
     }
@@ -32,19 +32,29 @@ const themeComponent = (theme) => () => {
   });
 
   const handleSectionBlur = (section, field) => (e) => {
-    const oldSection = state.data.sections.find(
-      (x) => x.title === section.title
-    );
-    const newSection = {
-      ...oldSection,
-      [field]: e.target.textContent,
-      edited: Math.floor(Date.now()),
-    };
-    const sections = [
-      ...state.data.sections.filter((x) => x.title !== oldSection.title),
-      newSection,
-    ];
+    const oldSection =
+      section && state.data.sections.find((x) => x.title === section.title);
+    const newSection = section
+      ? {
+          ...oldSection,
+          [field]: e.target.textContent,
+          edited: Math.floor(Date.now()),
+        }
+      : {
+          [field]: e.target.value,
+          edited: Math.floor(Date.now()),
+          created: Math.floor(Date.now()),
+        };
+    const sections = section
+      ? [
+          ...state.data.sections.filter((x) => x.title !== oldSection.title),
+          newSection,
+        ]
+      : [...state.data.sections, newSection];
+
     state.data.sections = sections;
+    state.data.edited = Math.floor(Date.now());
+    console.log(state.data.sections);
 
     getCurrentUser().then((user) => {
       saveHomePage(user.uid, state.data);
@@ -91,6 +101,30 @@ const themeComponent = (theme) => () => {
               </div>
             );
           })}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <Icon
+            style={{ fill: theme.palette.default.contrastText }}
+            icon={plusSquare}
+          />
+          <input
+            type="text"
+            placeholder="new section..."
+            style={{
+              background: "transparent",
+              border: `1px solid ${theme.palette.default.border}`,
+              color: theme.palette.default.contrastText,
+              width: "150px",
+              fontSize: "18px",
+              padding: "4px",
+            }}
+            on-blur={handleSectionBlur(null, "title")}
+          ></input>
+        </div>
       </div>
     </Content>
   );

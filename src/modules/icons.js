@@ -6,9 +6,19 @@ import {
   faEllipsisH,
   faEllipsisV,
 } from "@fortawesome/free-solid-svg-icons";
-import { faCommentDots } from "@fortawesome/free-regular-svg-icons";
+import {
+  faCommentDots,
+  faPlusSquare,
+} from "@fortawesome/free-regular-svg-icons";
 
-library.add(faBars, faCircle, faCommentDots, faEllipsisH, faEllipsisV);
+library.add(
+  faBars,
+  faCircle,
+  faCommentDots,
+  faEllipsisH,
+  faEllipsisV,
+  faPlusSquare
+);
 
 export const bars = icon({ prefix: "fas", iconName: "bars" });
 export const circle = icon({ prefix: "fas", iconName: "circle" });
@@ -21,6 +31,7 @@ export const ellipsisVertical = icon({
   iconName: "ellipsis-v",
 });
 export const commentDots = icon({ prefix: "far", iconName: "comment-dots" });
+export const plusSquare = icon({ prefix: "far", iconName: "plus-square" });
 
 export const Icon = ({ style, height, width, icon }) =>
   h(

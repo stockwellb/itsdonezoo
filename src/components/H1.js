@@ -3,6 +3,7 @@ import Snabbdom from "snabbdom-pragma";
 export default ({ style, ...rest }, children) => {
   const baseStyle = {
     textAlign: "center",
+    padding: "4px",
   };
 
   const handleKeydown = (e) => {

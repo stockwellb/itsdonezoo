@@ -42,7 +42,7 @@ export const getHomePage = async (uid, next, error) => {
 };
 
 export const saveHomePage = async (uid, data) => {
-  return db.collection("homes").doc(uid).set(data, { merge: true });
+  return db.collection("homes").doc(uid).set(data);
 };
 
 export const getCurrentUser = () => {

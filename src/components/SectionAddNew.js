@@ -1,6 +1,7 @@
 import Snabbdom from "snabbdom-pragma";
 import theme from "../theme";
-import { Icon, plusSquare } from "../modules/icons";
+import { IconButton } from ".";
+import { plusSquare } from "../modules/icons";
 
 const themeComponent = (theme) => ({ style, onAdd, ...rest }, children) => {
   let state = "";
@@ -32,20 +33,11 @@ const themeComponent = (theme) => ({ style, onAdd, ...rest }, children) => {
         on-input={handleInput}
       />
 
-      <button
+      <IconButton
         style={{ padding: "0px", margin: theme.spacing(1) }}
         on-click={handleOnClick}
-      >
-        <Icon
-          height={theme.spacing(8)}
-          width={theme.spacing(8)}
-          style={{
-            fill: theme.palette.default.contrastText,
-            background: theme.palette.default.main,
-          }}
-          icon={plusSquare}
-        />
-      </button>
+        icon={plusSquare}
+      />
     </div>
   );
 };

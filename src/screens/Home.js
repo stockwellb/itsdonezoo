@@ -1,9 +1,9 @@
 import Snabbdom from "snabbdom-pragma";
 import theme from "../theme";
 import { patch } from "../modules/vdom";
-import { Content, H2, H3, P, SectionAddNew } from "../components";
+import { Content, H2, H3, P, SectionAddNew, IconButton } from "../components";
 import { getHomePage, saveHomePage, getCurrentUser } from "../modules/api";
-import { Icon, bars } from "../modules/icons";
+import { bars } from "../modules/icons";
 
 const themeComponent = (theme) => () => {
   let state = { subscription: null, data: null };
@@ -32,6 +32,10 @@ const themeComponent = (theme) => () => {
   });
 
   const handleAdd = (value) => {
+    if (!value) {
+      return;
+    }
+
     if (!state.data.sections) {
       state.data.sections = [];
     }
@@ -102,15 +106,7 @@ const themeComponent = (theme) => () => {
                     alignItems: "center",
                   }}
                 >
-                  <Icon
-                    style={{
-                      fill: theme.palette.default.contrastText,
-                      background: theme.palette.default.main,
-                    }}
-                    icon={bars}
-                    height={theme.spacing(8)}
-                    width={theme.spacing(8)}
-                  />
+                  <IconButton icon={bars} on-click={(e) => console.log(e)} />
                   <H3
                     on-blur={handleEdit(section, "title")}
                     contentEditable="true"

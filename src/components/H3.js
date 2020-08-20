@@ -1,7 +1,7 @@
 import Snabbdom from "snabbdom-pragma";
 
 export default ({ style, ...rest }, children) => {
-  const baseStyle = { padding: "4px" };
+  const baseStyle = { padding: "4px", width: "100%" };
 
   const handleKeydown = (e) => {
     if (e.keyCode === 13) {

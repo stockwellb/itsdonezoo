@@ -7,13 +7,14 @@ import { Icon, ellipsisVertical } from "../modules/icons";
 
 const themeComponent = (theme) => () => {
   let state = { subscription: null, data: null };
+  let vnode;
 
   const setState = (newState) => {
     state = { ...state, ...newState };
   };
 
   const next = (snapshot) => {
-    const vnode = document.getElementById("content");
+    vnode = vnode || document.getElementById("content");
     if (!snapshot.exists) {
       return;
     }

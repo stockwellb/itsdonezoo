@@ -3,7 +3,7 @@ import theme from "../theme";
 import { patch } from "../modules/vdom";
 import { Content, H2, H3, P } from "../components";
 import { getHomePage, saveHomePage, getCurrentUser } from "../modules/api";
-import { Icon, ellipsisVertical, plusSquare } from "../modules/icons";
+import { Icon, ellipsisVertical, plusSquare, bars } from "../modules/icons";
 
 const themeComponent = (theme) => () => {
   let state = { subscription: null, data: null };
@@ -32,6 +32,9 @@ const themeComponent = (theme) => () => {
   });
 
   const handleSectionBlur = (section, field) => (e) => {
+    if (!section && !e.target.value) {
+      return;
+    }
     const oldSection =
       section && state.data.sections.find((x) => x.title === section.title);
     const newSection = section
@@ -90,7 +93,7 @@ const themeComponent = (theme) => () => {
               >
                 <Icon
                   style={{ fill: theme.palette.default.contrastText }}
-                  icon={ellipsisVertical}
+                  icon={bars}
                 />
                 <H3
                   on-blur={handleSectionBlur(section, "title")}
@@ -113,14 +116,15 @@ const themeComponent = (theme) => () => {
           />
           <input
             type="text"
-            placeholder="new section..."
+            placeholder="add new section"
             style={{
               background: "transparent",
               border: `1px solid ${theme.palette.default.border}`,
               color: theme.palette.default.contrastText,
-              width: "150px",
+              width: "175px",
               fontSize: "18px",
-              padding: "4px",
+              padding: "8px",
+              marginLeft: "4px",
             }}
             on-blur={handleSectionBlur(null, "title")}
           ></input>

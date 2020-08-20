@@ -35,6 +35,10 @@ const themeComponent = (theme) => () => {
     if (!section && !e.target.value) {
       return;
     }
+
+    if (!state.data.sections) {
+      state.data.sections = [];
+    }
     const oldSection =
       section && state.data.sections.find((x) => x.title === section.title);
     const newSection = section
@@ -81,29 +85,30 @@ const themeComponent = (theme) => () => {
         {doc.caption}
       </P>
       <div>
-        {doc.sections
-          .sort((a, b) => (a.created > b.created ? 1 : -1))
-          .map((section) => {
-            return (
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                }}
-              >
-                <Icon
-                  style={{ fill: theme.palette.default.contrastText }}
-                  icon={bars}
-                />
-                <H3
-                  on-blur={handleSectionBlur(section, "title")}
-                  contentEditable="true"
+        {doc.sections &&
+          doc.sections
+            .sort((a, b) => (a.created > b.created ? 1 : -1))
+            .map((section) => {
+              return (
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                  }}
                 >
-                  {section.title}
-                </H3>
-              </div>
-            );
-          })}
+                  <Icon
+                    style={{ fill: theme.palette.default.contrastText }}
+                    icon={bars}
+                  />
+                  <H3
+                    on-blur={handleSectionBlur(section, "title")}
+                    contentEditable="true"
+                  >
+                    {section.title}
+                  </H3>
+                </div>
+              );
+            })}
         <div
           style={{
             display: "flex",

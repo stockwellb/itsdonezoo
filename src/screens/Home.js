@@ -1,9 +1,9 @@
 import Snabbdom from "snabbdom-pragma";
 import theme from "../theme";
 import { patch } from "../modules/vdom";
-import { Content, H2, H3, P } from "../components";
+import { Content, H2, H3, P, SectionAddNew } from "../components";
 import { getHomePage, saveHomePage, getCurrentUser } from "../modules/api";
-import { Icon, ellipsisVertical, plusSquare, bars } from "../modules/icons";
+import { Icon, bars } from "../modules/icons";
 
 const themeComponent = (theme) => () => {
   let state = { subscription: null, data: null };
@@ -31,37 +31,43 @@ const themeComponent = (theme) => () => {
     setState({ subscription });
   });
 
-  const handleSectionBlur = (section, field) => (e) => {
-    if (!section && !e.target.value) {
-      return;
-    }
-
+  const handleAdd = (value) => {
     if (!state.data.sections) {
       state.data.sections = [];
     }
-    const oldSection =
-      section && state.data.sections.find((x) => x.title === section.title);
-    const newSection = section
-      ? {
-          ...oldSection,
-          [field]: e.target.textContent,
-          edited: Math.floor(Date.now()),
-        }
-      : {
-          [field]: e.target.value,
-          edited: Math.floor(Date.now()),
-          created: Math.floor(Date.now()),
-        };
-    const sections = section
-      ? [
-          ...state.data.sections.filter((x) => x.title !== oldSection.title),
-          newSection,
-        ]
-      : [...state.data.sections, newSection];
 
+    const newSection = {
+      title: value,
+      edited: Math.floor(Date.now()),
+      created: Math.floor(Date.now()),
+    };
+
+    const sections = [...state.data.sections, newSection];
+
+    save(sections);
+  };
+
+  const handleEdit = (section, field) => (e) => {
+    const oldSection = state.data.sections.find(
+      (x) => x.title === section.title
+    );
+    const newSection = {
+      ...oldSection,
+      [field]: e.target.textContent,
+      edited: Math.floor(Date.now()),
+    };
+
+    const sections = [
+      ...state.data.sections.filter((x) => x.title !== oldSection.title),
+      newSection,
+    ];
+
+    save(sections);
+  };
+
+  const save = (sections) => {
     state.data.sections = sections;
     state.data.edited = Math.floor(Date.now());
-    console.log(state.data.sections);
 
     getCurrentUser().then((user) => {
       saveHomePage(user.uid, state.data);
@@ -97,11 +103,16 @@ const themeComponent = (theme) => () => {
                   }}
                 >
                   <Icon
-                    style={{ fill: theme.palette.default.contrastText }}
+                    style={{
+                      fill: theme.palette.default.contrastText,
+                      background: theme.palette.default.main,
+                    }}
                     icon={bars}
+                    height={theme.spacing(8)}
+                    width={theme.spacing(8)}
                   />
                   <H3
-                    on-blur={handleSectionBlur(section, "title")}
+                    on-blur={handleEdit(section, "title")}
                     contentEditable="true"
                   >
                     {section.title}
@@ -109,31 +120,7 @@ const themeComponent = (theme) => () => {
                 </div>
               );
             })}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-          }}
-        >
-          <Icon
-            style={{ fill: theme.palette.default.contrastText }}
-            icon={plusSquare}
-          />
-          <input
-            type="text"
-            placeholder="add new section"
-            style={{
-              background: "transparent",
-              border: `1px solid ${theme.palette.default.border}`,
-              color: theme.palette.default.contrastText,
-              width: "175px",
-              fontSize: "18px",
-              padding: "8px",
-              marginLeft: "4px",
-            }}
-            on-blur={handleSectionBlur(null, "title")}
-          ></input>
-        </div>
+        <SectionAddNew onAdd={handleAdd} />
       </div>
     </Content>
   );

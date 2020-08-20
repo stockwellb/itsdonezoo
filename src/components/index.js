@@ -12,5 +12,6 @@ export { default as Link } from "./Link";
 export { default as Nav } from "./Nav";
 export { default as P } from "./P";
 export { default as Section } from "./Section";
+export { default as SectionAddNew } from "./SectionAddNew";
 export { default as TextField } from "./TextField";
 export { default as WelcomeHeader } from "./WelcomeHeader";

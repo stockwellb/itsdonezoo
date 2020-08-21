@@ -52,7 +52,7 @@ export const Icon = ({ style, height, width, icon }) =>
             width: width || "18px",
             height: height || "18px",
             xmlns: "http://www.w3.org/2000/svg",
-            viewBox: `-30 0 512 512`,
+            viewBox: `-35 0 512 512`,
           },
           style,
         },

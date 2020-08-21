@@ -25,6 +25,7 @@ const themeComponent = (theme) => ({ style, onAdd, ...rest }, children) => {
         style={{
           background: "transparent",
           border: `1px solid ${theme.palette.default.border}`,
+          borderRight: "none",
           color: theme.palette.default.contrastText,
           width: "175px",
           fontSize: theme.typography.fontSize,
@@ -34,7 +35,13 @@ const themeComponent = (theme) => ({ style, onAdd, ...rest }, children) => {
       />
 
       <IconButton
-        style={{ padding: "0px", margin: theme.spacing(1) }}
+        color={theme.palette.default.main}
+        background={theme.palette.primary.main}
+        style={{
+          border: `1px solid ${theme.palette.default.border}`,
+          padding: "4px",
+          borderLeft: "none",
+        }}
         on-click={handleOnClick}
         icon={plusSquare}
       />

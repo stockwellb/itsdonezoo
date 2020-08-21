@@ -2,15 +2,31 @@ import Snabbdom from "snabbdom-pragma";
 import theme from "../theme";
 import { Icon } from "../modules/icons";
 
-const themeComponent = (theme) => ({ style, icon, ...rest }) => {
+const themeComponent = (theme) => ({
+  style,
+  icon,
+  color,
+  background,
+  ...rest
+}) => {
   return (
-    <button style={{ padding: "0px", margin: theme.spacing(1) }} {...rest}>
+    <button
+      style={{
+        ...{
+          padding: "0px",
+          margin: "0px",
+          background: background || theme.palette.default.main,
+        },
+        ...style,
+      }}
+      {...rest}
+    >
       <Icon
-        height={theme.spacing(8)}
-        width={theme.spacing(8)}
+        height="29px"
+        width="28px"
         style={{
-          fill: theme.palette.default.contrastText,
-          background: theme.palette.default.main,
+          fill: color || theme.palette.default.contrastText,
+          background: background || theme.palette.default.main,
         }}
         icon={icon}
       />

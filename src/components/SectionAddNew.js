@@ -12,6 +12,13 @@ const themeComponent = (theme) => ({ style, onAdd, ...rest }, children) => {
     state = e.target.value;
   };
 
+  const handleKeyup = (e) => {
+    if (e.keyCode == 13) {
+      state = e.target.value;
+      onAdd && onAdd(state);
+    }
+  };
+
   return (
     <div
       style={{
@@ -31,6 +38,7 @@ const themeComponent = (theme) => ({ style, onAdd, ...rest }, children) => {
           fontSize: theme.typography.fontSize,
           padding: theme.spacing(2),
         }}
+        on-keyup={handleKeyup}
         on-input={handleInput}
       />
 

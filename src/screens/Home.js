@@ -31,6 +31,14 @@ const themeComponent = (theme) => () => {
     setState({ subscription });
   });
 
+  const handleBlur = (section) => (e) => {
+    if (!e.target.textContent) {
+      remove(section);
+    } else {
+      edit(section, e);
+    }
+  };
+
   const handleAdd = (value) => {
     if (!value) {
       return;
@@ -51,19 +59,31 @@ const themeComponent = (theme) => () => {
     save(sections);
   };
 
-  const handleEdit = (section, field) => (e) => {
+  const edit = (section, e) => {
     const oldSection = state.data.sections.find(
       (x) => x.title === section.title
     );
     const newSection = {
       ...oldSection,
-      [field]: e.target.textContent,
+      title: e.target.textContent,
       edited: Math.floor(Date.now()),
     };
 
     const sections = [
       ...state.data.sections.filter((x) => x.title !== oldSection.title),
       newSection,
+    ];
+
+    save(sections);
+  };
+
+  const remove = (section) => {
+    const oldSection = state.data.sections.find(
+      (x) => x.title === section.title
+    );
+
+    const sections = [
+      ...state.data.sections.filter((x) => x.title !== oldSection.title),
     ];
 
     save(sections);
@@ -106,11 +126,7 @@ const themeComponent = (theme) => () => {
                     alignItems: "center",
                   }}
                 >
-                  <IconButton icon={bars} on-click={(e) => console.log(e)} />
-                  <H3
-                    on-blur={handleEdit(section, "title")}
-                    contentEditable="true"
-                  >
+                  <H3 on-blur={handleBlur(section)} contentEditable="true">
                     {section.title}
                   </H3>
                 </div>

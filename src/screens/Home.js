@@ -99,7 +99,18 @@ const themeComponent = (theme) => () => {
   };
 
   const handleRootBlur = (field) => (e) => {
-    state.data[field] = e.target.textContent;
+    let value = e.target.textContent;
+
+    if (!value) {
+      if (field === "title") {
+        value = "Home";
+      }
+      if (field === "caption") {
+        value = "Add some lists here!";
+      }
+    }
+
+    state.data[field] = value;
 
     getCurrentUser().then((user) => {
       saveHomePage(user.uid, state.data);

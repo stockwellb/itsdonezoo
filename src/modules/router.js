@@ -1,60 +1,70 @@
-import Snabbdom from "snabbdom-pragma";
-import { patch } from "./vdom";
 import queryString from "query-string";
 
-export const buildRoute = (Component, publicRoute) => ({
-  getComponent: (params) => <Component {...params} />,
-  public: publicRoute,
-});
-
-export default (id, routes, isAuth, defaultPath, signInPath) => {
-  const view = (path, state) => {
-    const authenticated = isAuth();
-    const route = routes[path];
-
-    if (!route) {
-      console.log(`no route, rerouting to ${defaultPath}`);
-      location.hash = defaultPath;
-      return null;
-    }
-
-    if (!route.public && !authenticated) {
-      console.log(`not logged in rerouting to ${signInPath}`);
-      location.hash = signInPath;
-      return null;
-    }
-
-    return route.getComponent(state);
-  };
-
-  const render = (path, state) => {
-    const vnode = document.getElementById(id);
-    const v = view(path, state);
-    v && patch(vnode, v);
-  };
-
-  const parseHash = (hash) => {
-    const [url, query] = hash.split("?");
-    const path = url.replace(/^#\/?|\/$/g, "").split("/");
-    const params = queryString.parse(query || "");
-    return { path, params };
-  };
-
-  document.addEventListener("DOMContentLoaded", (event) => {
-    console.log("dom ready", location.hash || location);
-    if (!location.hash) {
-      return;
-    }
-    const { path, params } = parseHash(location.hash);
-    render(path, params);
-  });
-
-  onpopstate = () => {
-    console.log("pop state", location.hash || location);
-    if (!location.hash) {
-      return;
-    }
-    const { path, params } = parseHash(location.hash);
-    render(path, params);
-  };
+const parseHash = (hash) => {
+  const [url, query] = hash.split("?");
+  const path = url.replace(/^#\/?|\/$/g, "").split("/");
+  const params = queryString.parse(query || "");
+  return { path, params };
 };
+
+function Router() {
+  this._authCheck = null;
+  this._notFoundHandler = null;
+  this._authFailedHandler = null;
+  this._routes = [];
+  this._listen();
+}
+
+Router.prototype = {
+  _add: function (route, authenticated, handler) {
+    if (typeof route === "string") {
+      route = encodeURI(route);
+    }
+    this._routes.push({ route, authenticated, handler });
+  },
+
+  _resolve: function (e) {
+    const { path, params } = parseHash(e.newURL);
+    const url = `/${path.slice(-1)}`;
+    const route = this._routes.find((x) => x.route === url);
+    if (route) {
+      if (route.authenticated && this._authCheck()) {
+        console.log("auth routing", url, route, this._authCheck());
+        route.handler(params);
+      } else if (!route.authenticated) {
+        console.log("public routing", url);
+        route.handler(params);
+      } else {
+        console.log("auth failed", url);
+        this._authFailedHandler();
+      }
+    } else {
+      console.log("404", url);
+      this._notFoundHandler();
+    }
+  },
+
+  _listen: function () {
+    document.addEventListener("DOMContentLoaded", () => {
+      window.addEventListener("hashchange", (e) => {
+        this._resolve(e);
+      });
+      this._resolve({ newURL: location.hash || "/" });
+    });
+  },
+
+  on: function (...args) {
+    const [route, authenticated, handler] = args;
+    this._add(route, authenticated, handler);
+  },
+
+  notFound: function (handler) {
+    this._notFoundHandler = handler;
+  },
+
+  onAuthFailed: function (check, handler) {
+    (this._authCheck = check), (this._authFailedHandler = handler);
+  },
+};
+
+export default Router;

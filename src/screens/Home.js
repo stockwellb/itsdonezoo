@@ -1,11 +1,10 @@
 import Snabbdom from "snabbdom-pragma";
 import theme from "../theme";
 import { patch } from "../modules/vdom";
-import { Content, H2, H3, P, SectionAddNew, IconButton } from "../components";
+import { Content, H2, H3, P, SectionAddNew } from "../components";
 import { getHomePage, saveHomePage, getCurrentUser } from "../modules/api";
-import { bars } from "../modules/icons";
 
-const themeComponent = (theme) => () => {
+const themeComponent = (theme) => ({}, children) => {
   let state = { subscription: null, data: null };
   let vnode;
 
@@ -147,6 +146,7 @@ const themeComponent = (theme) => () => {
       </div>
     </Content>
   );
+  return <Content style={{ margin: theme.spacing(4) }}></Content>;
 };
 
 export default (() => themeComponent(theme))();

@@ -16,7 +16,7 @@ const themeComponent = (theme) => () => (
     <P>Some stuff about you should go here.</P>
     <ul>
       <ListItem>
-        <Link href="#" on-click={handleSignOut}>
+        <Link href="#/signin" on-click={handleSignOut}>
           Sign out
         </Link>
       </ListItem>

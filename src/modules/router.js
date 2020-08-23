@@ -29,7 +29,7 @@ Router.prototype = {
     const route = this._routes.find((x) => x.route === url);
     if (route) {
       if (route.authenticated && this._authCheck()) {
-        console.log("auth routing", url, route, this._authCheck());
+        console.log("auth routing", url);
         route.handler(params);
       } else if (!route.authenticated) {
         console.log("public routing", url);

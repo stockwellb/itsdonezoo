@@ -61,7 +61,7 @@ router.onAuthFailed(isAuth, (params) => patchRoute(SignIn, params));
 // route auth state changes
 auth().onAuthStateChanged((user) => {
   const vnode = document.getElementById(NAV_LOCATOR);
-  console.log("auth state changed.", !!user);
+  console.log(`auth state changed: logged ${!!user ? "in" : "out"}`);
   if (user) {
     localStorage.setItem(STORAGE_LOCATION, "1");
     patch(vnode, <Nav />);

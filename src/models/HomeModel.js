@@ -1,6 +1,6 @@
 import { generatePushID } from "../modules/lib";
 
-const initialData = {
+export const initialData = {
   title: "Home",
   caption: "You can keep track of all your lists right here!",
   sections: [
@@ -29,7 +29,7 @@ const actions = {
 };
 
 function HomeModel(initialState) {
-  this._state = initialState || initialData || {};
+  this._state = initialState || {};
   this._onDispatchedHandler = null;
   this._onLoadHandler = null;
   this._subscription = null;

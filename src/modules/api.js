@@ -1,6 +1,5 @@
 import { auth, db, firestore } from "./firebase";
-import { generatePushID } from "../modules/lib";
-import HomeModel from "../models/HomeModel";
+import { initialData } from "../models/HomeModel";
 
 export const signIn = (email, password) => {
   return auth().signInWithEmailAndPassword(email, password);
@@ -26,9 +25,7 @@ export const homePageSubscription = async (next, error) => {
       .then((ss) =>
         ss.exists
           ? doc.onSnapshot(next, error)
-          : doc
-              .set(new HomeModel().getState())
-              .then(() => doc.onSnapshot(next, error))
+          : doc.set(initialData).then(() => doc.onSnapshot(next, error))
       );
   });
 };

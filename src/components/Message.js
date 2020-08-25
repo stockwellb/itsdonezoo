@@ -2,7 +2,7 @@ import Snabbdom from "snabbdom-pragma";
 import theme from "../theme";
 import { P } from "../components";
 
-const themeComponent = (theme) => ({ error, blank }, children) => {
+const themeComponent = (theme) => ({ error, blank, action }, children) => {
   const id = "message";
 
   const rootStyle = {
@@ -46,6 +46,7 @@ const themeComponent = (theme) => ({ error, blank }, children) => {
         <P style={{ ...messageStyle, ...(error && errorMessageStyle) }}>
           {children}
         </P>
+        {action && <button on-click={action.f}>{action.title}</button>}
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 import Snabbdom from "snabbdom-pragma";
 import theme from "../theme";
 import { patch } from "../modules/vdom";
+import { showErrorMessage, showMessage } from "../modules/error";
 import HomeModel from "../models/HomeModel";
 import { Content, H2, H3, P, SectionAddNew } from "../components";
 import { homePageSubscription, saveHomePage } from "../modules/api";
@@ -11,7 +12,12 @@ const themeComponent = (theme) => () => {
 
   // Model events
   model.onDispatched((state) => {
-    saveHomePage(state);
+    saveHomePage(state).then((x) =>
+      showMessage("Saved!", {
+        clear: true,
+        action: { f: () => model.undo(), title: "Undo" },
+      })
+    );
   });
 
   model.onLoad((state) => {

@@ -35,7 +35,7 @@ const themeComponent = (theme) => () => {
   const handleSignUp = () => {
     return signUp(state.email, state.password)
       .then(() => {
-        showMessage("Signed up successfully!");
+        showMessage("Signed up successfully!", { clear: true });
       })
       .catch((e) => {
         showErrorMessage(e.message);

@@ -35,7 +35,7 @@ const themeComponent = (theme) => () => {
   const handleSignIn = () => {
     return signIn(state.email, state.password)
       .then(() => {
-        showMessage("Signed in successfully!");
+        showMessage("Signed in successfully!", { clear: true });
       })
       .catch((e) => {
         showErrorMessage(e.message);

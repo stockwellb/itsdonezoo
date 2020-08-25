@@ -33,6 +33,13 @@ HomeModel.prototype = {
     this._onLoadHandler && this._onLoadHandler(this._state);
   },
 
+  undo: function () {
+    const _ = this._history.pop();
+    const previous = this._history.pop();
+    this._setState(previous);
+    this._onDispatchedHandler && this._onDispatchedHandler(this._state);
+  },
+
   onDispatched: function (handler) {
     this._onDispatchedHandler = handler;
   },
@@ -71,8 +78,8 @@ HomeModel.prototype = {
   _setState: function (state) {
     this._state = state;
     this._history.push(state);
-    if (this._history.length >= 3) {
-      this._history.shift();
+    if (this._history.length > 25) {
+      this._history = this._history.slice(-25);
     }
     console.log(this._history);
   },
@@ -96,10 +103,6 @@ HomeModel.prototype = {
   },
 
   _addSection: function (value) {
-    if (!value) {
-      return;
-    }
-
     if (!this._state.sections) {
       this._state.sections = [];
     }

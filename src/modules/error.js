@@ -16,10 +16,15 @@ const clearMessage = () => {
   show(<Message blank />, false);
 };
 
-export const showErrorMessage = (message, clear = true) => {
-  show(<Message error>{message}</Message>, clear);
+export const showErrorMessage = (message, { clear, action }) => {
+  show(
+    <Message error action={action}>
+      {message}
+    </Message>,
+    clear
+  );
 };
 
-export const showMessage = (message, clear = true) => {
-  show(<Message>{message}</Message>, clear);
+export const showMessage = (message, { clear, action }) => {
+  show(<Message action={action}>{message}</Message>, clear);
 };

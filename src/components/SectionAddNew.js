@@ -5,9 +5,11 @@ import { plusSquare } from "../modules/icons";
 
 const themeComponent = (theme) => ({ style, onAdd, ...rest }, children) => {
   let state = "";
+
   const handleOnClick = () => {
     onAdd && onAdd(state);
   };
+
   const handleInput = (e) => {
     state = e.target.value;
   };

@@ -6,7 +6,7 @@ import theme from "../theme";
 
 const handleSignOut = () => {
   return signOut()
-    .then(() => showMessage("You've been signed out!", true))
+    .then(() => showMessage("You've been signed out!", { clear: true }))
     .catch((e) => showErrorMessage(e.message));
 };
 

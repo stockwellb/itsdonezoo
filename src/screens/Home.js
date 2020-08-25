@@ -3,9 +3,9 @@ import theme from "../theme";
 import { patch } from "../modules/vdom";
 import HomeModel from "../models/HomeModel";
 import { Content, H2, H3, P, SectionAddNew } from "../components";
-import { getHomePage, saveHomePage } from "../modules/api";
+import { homePageSubscription, saveHomePage } from "../modules/api";
 
-const themeComponent = (theme) => ({}, children) => {
+const themeComponent = (theme) => () => {
   let subscription;
   const model = new HomeModel();
 
@@ -15,14 +15,11 @@ const themeComponent = (theme) => ({}, children) => {
   });
 
   model.onLoad((state) => {
-    if (!state) {
-      return;
-    }
     const vnode = document.getElementById("content");
     patch(vnode, view(state));
   });
 
-  model.subscribe(getHomePage);
+  model.subscribe(homePageSubscription);
 
   // UI Handlers
   const editOrRemoveSection = (section) => (e) => {

@@ -17,6 +17,9 @@ Toaster.prototype = {
       : this._vnode;
     this._vnode = patch(this._vnode, view);
     if (clear) {
+      if (this._timer) {
+        window.clearTimeout(this._timer);
+      }
       this._timer = setTimeout(
         Toaster.prototype._clear.bind(this),
         TIMEOUT_SECONDS * 1000

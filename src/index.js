@@ -3,7 +3,7 @@ import "./index.css";
 import { patchComponent } from "./modules/vdom";
 import App from "./App";
 import Nav from "./components/Nav";
-import Router from "./modules/router";
+import Router from "./modules/Router";
 import { auth } from "./modules/firebase";
 import { isAuth } from "./modules/lib";
 // routes

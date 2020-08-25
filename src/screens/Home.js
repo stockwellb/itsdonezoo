@@ -1,125 +1,60 @@
 import Snabbdom from "snabbdom-pragma";
 import theme from "../theme";
 import { patch } from "../modules/vdom";
+import HomeModel from "../models/HomeModel";
 import { Content, H2, H3, P, SectionAddNew } from "../components";
-import { generatePushID } from "../modules/lib";
 import { getHomePage, saveHomePage, getCurrentUser } from "../modules/api";
 
 const themeComponent = (theme) => ({}, children) => {
-  let state = { subscription: null, data: null };
-  let vnode;
+  let subscription;
+  const model = new HomeModel();
 
-  const setState = (newState) => {
-    state = { ...state, ...newState };
-  };
-
-  const next = (snapshot) => {
-    vnode = document.getElementById("content");
-    if (!snapshot.exists) {
-      return;
-    }
-    setState({ data: snapshot.data() });
-    patch(vnode, view(state.data));
-  };
-
-  const error = (error) => {
-    console.log("error", error);
-  };
-
-  getCurrentUser().then((user) => {
-    const subscription = getHomePage(user.uid, next, error);
-    setState({ subscription });
+  model.onChange((state) => {
+    getCurrentUser().then((user) => {
+      saveHomePage(user.uid, state);
+    });
   });
 
-  const handleBlur = (section) => (e) => {
-    if (!e.target.textContent) {
-      remove(section);
-    } else {
-      edit(section, e);
-    }
-  };
-
-  const handleAdd = (value) => {
-    if (!value) {
+  model.onLoad((state) => {
+    if (!state) {
       return;
     }
+    const vnode = document.getElementById("content");
+    patch(vnode, view(state));
+  });
 
-    if (!state.data.sections) {
-      state.data.sections = [];
-    }
-
-    const newSection = {
-      id: generatePushID(),
-      title: value,
-      edited: Math.floor(Date.now()),
-      created: Math.floor(Date.now()),
-    };
-
-    const sections = [...state.data.sections, newSection];
-
-    save(sections);
+  const activateSubscription = (user) => {
+    subscription = getHomePage(
+      user.uid,
+      (snapshot) => model.load(snapshot.data()),
+      (error) => console.log("error", error)
+    );
   };
 
-  const edit = (section, e) => {
-    const oldSection = state.data.sections.find((x) => x.id === section.id);
-    const updatedSection = {
-      ...oldSection,
-      title: e.target.textContent,
-      edited: Math.floor(Date.now()),
-    };
-
-    const sections = [
-      ...state.data.sections.filter((x) => x.id !== oldSection.id),
-      updatedSection,
-    ];
-
-    save(sections);
-  };
-
-  const remove = (section) => {
-    const oldSection = state.data.sections.find((x) => x.id === section.id);
-
-    const sections = [
-      ...state.data.sections.filter((x) => x.id !== oldSection.id),
-    ];
-
-    save(sections);
-  };
-
-  const save = (sections) => {
-    state.data.sections = sections;
-    state.data.edited = Math.floor(Date.now());
-
-    getCurrentUser().then((user) => {
-      saveHomePage(user.uid, state.data);
-    });
-  };
-
-  const handleRootBlur = (field) => (e) => {
-    let value = e.target.textContent;
-
+  const editOrRemoveSection = (section) => (e) => {
+    const value = e.target.textContent;
     if (!value) {
-      if (field === "title") {
-        value = "Home";
-      }
-      if (field === "caption") {
-        value = "Add some lists here!";
-      }
+      model.removeSection(section);
+    } else {
+      model.editSection(section, value);
     }
+  };
 
-    state.data[field] = value;
+  const addSection = (value) => {
+    model.addSection(value);
+  };
 
-    getCurrentUser().then((user) => {
-      saveHomePage(user.uid, state.data);
-    });
+  const editField = (field) => (e) => {
+    let value = e.target.textContent;
+    model.setField(field, value);
   };
 
   const view = (doc) => (
     <Content style={{ margin: theme.spacing(4) }}>
-      <H2 on-blur={handleRootBlur("title")} contentEditable="true">
+      <H2 on-blur={editField("title")} contentEditable="true">
         {doc.title}
       </H2>
-      <P on-blur={handleRootBlur("caption")} contentEditable="true">
+      <P on-blur={editField("caption")} contentEditable="true">
         {doc.caption}
       </P>
       <div>
@@ -135,16 +70,21 @@ const themeComponent = (theme) => ({}, children) => {
                     alignItems: "center",
                   }}
                 >
-                  <H3 on-blur={handleBlur(section)} contentEditable="true">
+                  <H3
+                    on-blur={editOrRemoveSection(section)}
+                    contentEditable="true"
+                  >
                     {section.title}
                   </H3>
                 </div>
               );
             })}
-        <SectionAddNew onAdd={handleAdd} />
+        <SectionAddNew onAdd={addSection} />
       </div>
     </Content>
   );
+
+  getCurrentUser().then(activateSubscription);
   return <Content style={{ margin: theme.spacing(4) }}></Content>;
 };
 

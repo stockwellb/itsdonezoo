@@ -1,13 +1,14 @@
 import Snabbdom from "snabbdom-pragma";
 import { signOut } from "../modules/api";
 import { Content, Link, H2, P, ListItem } from "../components";
-import { showMessage, showErrorMessage } from "../modules/error";
 import theme from "../theme";
 
 const handleSignOut = () => {
+  const toaster = window.app.toaster;
+
   return signOut()
-    .then(() => showMessage("You've been signed out!", { clear: true }))
-    .catch((e) => showErrorMessage(e.message));
+    .then(() => toaster.success("You've been signed out!", { clear: true }))
+    .catch((e) => toaster.error(e.message));
 };
 
 const themeComponent = (theme) => () => (

@@ -14,6 +14,7 @@ import SignIn from "./screens/SignIn";
 import SignUp from "./screens/SignUp";
 import ChangePassword from "./screens/ChangePassword";
 import ForgotPassword from "./screens/ForgotPassword";
+import Toaster from "./modules/toaster";
 // end routes
 
 const HOME = "/home";
@@ -23,6 +24,11 @@ const STORAGE_LOCATION = "itsdonezoo.signedIn";
 const ROOT_LOCATOR = "root";
 const CONTENT_LOCATOR = "content";
 const NAV_LOCATOR = "nav";
+const MESSAGE_LOCATOR = "message";
+
+// create app namespace
+window.app = {};
+window.app.toaster = new Toaster(MESSAGE_LOCATOR);
 
 // load the app
 patchComponent(ROOT_LOCATOR, App);
@@ -46,18 +52,19 @@ router.on("/signup", false, (params) =>
   patchComponent(CONTENT_LOCATOR, SignUp, params)
 );
 router.on("/change-password", true, (params) =>
-  patchRoute(ChangePassword, params)
+  patchComponent(CONTENT_LOCATOR, ChangePassword, params)
 );
 router.on("/forgot-password", false, (params) =>
-  patchRoute(ForgotPassword, params)
+  patchComponent(CONTENT_LOCATOR, ForgotPassword, params)
 );
-router.notFound((params) => patchRoute(Home, params));
+router.notFound((params) => patchComponent(Home, params));
 router.onAuthFailed(isAuth(STORAGE_LOCATION), (params) =>
-  patchRoute(SignIn, params)
+  patchComponent(CONTENT_LOCATOR, SignIn, params)
 );
 
 // route auth state changes
 auth().onAuthStateChanged((user) => {
+  const NavStub = () => <div id={NAV_LOCATOR}></div>;
   console.log(`auth state changed: logged ${!!user ? "in" : "out"}`);
   if (user) {
     localStorage.setItem(STORAGE_LOCATION, "1");
@@ -66,7 +73,7 @@ auth().onAuthStateChanged((user) => {
       location.hash = HOME;
     }
   } else {
-    patchComponent(NAV_LOCATOR, <div id={NAV_LOCATOR}></div>);
+    patchComponent(NAV_LOCATOR, NavStub);
     localStorage.removeItem(STORAGE_LOCATION);
     if (location.hash !== `#${SIGNUP}`) {
       location.hash = SIGNIN;

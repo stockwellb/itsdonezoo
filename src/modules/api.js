@@ -16,6 +16,9 @@ export const signOut = () => {
 
 export const homePageSubscription = async (next, error) => {
   return getCurrentUser().then((user) => {
+    if (!user) {
+      return null;
+    }
     const doc = db.collection("homes").doc(user.uid);
 
     return doc

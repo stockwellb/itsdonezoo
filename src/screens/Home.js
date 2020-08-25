@@ -1,28 +1,37 @@
 import Snabbdom from "snabbdom-pragma";
 import theme from "../theme";
 import { patch } from "../modules/vdom";
-import { showErrorMessage, showMessage } from "../modules/error";
 import HomeModel from "../models/HomeModel";
 import { Content, H2, H3, P, SectionAddNew } from "../components";
 import { homePageSubscription, saveHomePage } from "../modules/api";
 
 const themeComponent = (theme) => () => {
   let vnode;
+  const toaster = window.app.toaster;
   const model = new HomeModel();
-  console.log(HomeModel.test);
 
   // Model events
   model.onDispatched((state, command) => {
     const title = command ? command.meta || "Saved!" : "Saved!";
     saveHomePage(state)
       .then(() =>
-        showMessage(title, {
+        toaster.success(title, {
           clear: true,
-          action: { f: () => model.undo(), title: "Undo" },
+          action:
+            command.action !== model.actions.UNDO
+              ? {
+                  f: () =>
+                    model.dispatch({
+                      meta: "Undo complete",
+                      action: model.actions.UNDO,
+                    }),
+                  title: "Undo",
+                }
+              : null,
         })
       )
       .catch((error) => {
-        showMessage(error.message, {
+        toaster.error(error.message, {
           clear: true,
         });
       });

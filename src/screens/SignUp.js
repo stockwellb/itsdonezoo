@@ -1,6 +1,5 @@
 import Snabbdom from "snabbdom-pragma";
 import { signUp } from "../modules/api";
-import { showErrorMessage, showMessage } from "../modules/error";
 import {
   TextField,
   Button,
@@ -15,6 +14,7 @@ import theme from "../theme";
 
 const themeComponent = (theme) => () => {
   let state = { email: "", password: "" };
+  const toaster = window.app.toaster;
 
   const setState = (newState) => {
     state = { ...state, ...newState };
@@ -35,10 +35,10 @@ const themeComponent = (theme) => () => {
   const handleSignUp = () => {
     return signUp(state.email, state.password)
       .then(() => {
-        showMessage("Signed up successfully!", { clear: true });
+        toaster.success("Signed up successfully!", { clear: true });
       })
       .catch((e) => {
-        showErrorMessage(e.message);
+        toaster.error(e.message);
       });
   };
 

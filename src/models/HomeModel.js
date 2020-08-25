@@ -25,6 +25,7 @@ const actions = {
   ADD_SECTION: "ADD_SECTION",
   EDIT_SECTION: "EDIT_SECTION",
   REMOVE_SECTION: "REMOVE_SECTION",
+  UNDO: "UNDO",
 };
 
 function HomeModel(initialState) {
@@ -55,13 +56,6 @@ HomeModel.prototype = {
 
   getState: function () {
     return { ...this._state };
-  },
-
-  undo: function () {
-    const _ = this._history.pop();
-    const previous = this._history.pop();
-    this._setState(previous);
-    this._onDispatchedHandler && this._onDispatchedHandler(this._state);
   },
 
   onDispatched: function (handler) {
@@ -95,9 +89,18 @@ HomeModel.prototype = {
         this._editSection(command.data);
         break;
       }
+      case actions.UNDO: {
+        this._undo();
+        break;
+      }
     }
     this._onDispatchedHandler &&
       this._onDispatchedHandler(this._state, command || {});
+  },
+
+  _undo: function () {
+    const previous = this._history.slice(-2).reverse().pop();
+    this._setState(previous);
   },
 
   _setState: function (state) {

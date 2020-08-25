@@ -14,12 +14,18 @@ const themeComponent = (theme) => () => {
   // Model events
   model.onDispatched((state, command) => {
     const title = command ? command.meta || "Saved!" : "Saved!";
-    saveHomePage(state).then((x) =>
-      showMessage(title, {
-        clear: true,
-        action: { f: () => model.undo(), title: "Undo" },
-      })
-    );
+    saveHomePage(state)
+      .then(() =>
+        showMessage(title, {
+          clear: true,
+          action: { f: () => model.undo(), title: "Undo" },
+        })
+      )
+      .catch((error) => {
+        showMessage(error.message, {
+          clear: true,
+        });
+      });
   });
 
   model.onLoad((state) => {

@@ -38,6 +38,20 @@ const themeComponent = (theme) => ({ error, blank, action }, children) => {
     color: theme.palette.error.contrastText,
   };
 
+  const buttonStyle = {
+    minWidth: theme.spacing(16),
+    backgroundColor: theme.palette.default.main,
+    borderRadius: theme.spacing(1),
+    border: `1px solid ${theme.palette.default.dark}`,
+    color: theme.palette.default.contrastText,
+    textAlign: "center",
+    fontSize: theme.typography.fontSize,
+    padding: theme.spacing(1),
+    margin: theme.spacing(1),
+    transition: "all 0.5s",
+    cursor: "pointer",
+  };
+
   const slug = <div id={id}></div>;
 
   const message = (
@@ -46,7 +60,11 @@ const themeComponent = (theme) => ({ error, blank, action }, children) => {
         <P style={{ ...messageStyle, ...(error && errorMessageStyle) }}>
           {children}
         </P>
-        {action && <button on-click={action.f}>{action.title}</button>}
+        {action && (
+          <button style={buttonStyle} on-click={action.f}>
+            {action.title}
+          </button>
+        )}
       </div>
     </div>
   );

@@ -129,6 +129,7 @@ const themeComponent = (theme) => ({}, children) => {
             .map((section) => {
               return (
                 <div
+                  id={section.id}
                   style={{
                     display: "flex",
                     alignItems: "center",

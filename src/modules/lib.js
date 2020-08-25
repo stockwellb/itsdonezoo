@@ -1,3 +1,4 @@
+import { auth } from "./firebase";
 /**
  * Fancy ID generator that creates 20-character string identifiers with the following properties:
  *
@@ -57,3 +58,10 @@ export const generatePushID = (function () {
     return id;
   };
 })();
+
+// how to check if the user is logged in
+export const isAuth = (storageLocation) => () => {
+  return (
+    auth().currentUser !== null || localStorage.getItem(storageLocation) === "1"
+  );
+};

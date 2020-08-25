@@ -1,3 +1,4 @@
+import Snabbdom from "snabbdom-pragma";
 import { init } from "snabbdom/build/package/init";
 import { classModule } from "snabbdom/build/package/modules/class";
 import { propsModule } from "snabbdom/build/package/modules/props";
@@ -13,3 +14,8 @@ export const patch = init([
   eventListenersModule,
   attributesModule,
 ]);
+
+export const patchComponent = (selector, Component, params = {}) => {
+  const vnode = document.getElementById(selector);
+  patch(vnode, <Component {...params} />);
+};

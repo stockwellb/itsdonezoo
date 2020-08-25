@@ -1,4 +1,5 @@
 import { auth, db, firestore } from "./firebase";
+import { generatePushID } from "../modules/lib";
 
 export const signIn = (email, password) => {
   return auth().signInWithEmailAndPassword(email, password);
@@ -24,11 +25,13 @@ export const getHomePage = async (uid, next, error) => {
           caption: "You can keep track of all your lists right here!",
           sections: [
             {
+              id: generatePushID(),
               title: "due today",
               created: 0,
               edited: 0,
             },
             {
+              id: generatePushID(),
               title: "due this week",
               created: 1,
               edited: 1,

@@ -2,6 +2,7 @@ import Snabbdom from "snabbdom-pragma";
 import theme from "../theme";
 import { patch } from "../modules/vdom";
 import { Content, H2, H3, P, SectionAddNew } from "../components";
+import { generatePushID } from "../modules/lib";
 import { getHomePage, saveHomePage, getCurrentUser } from "../modules/api";
 
 const themeComponent = (theme) => ({}, children) => {
@@ -48,6 +49,7 @@ const themeComponent = (theme) => ({}, children) => {
     }
 
     const newSection = {
+      id: generatePushID(),
       title: value,
       edited: Math.floor(Date.now()),
       created: Math.floor(Date.now()),
@@ -59,30 +61,26 @@ const themeComponent = (theme) => ({}, children) => {
   };
 
   const edit = (section, e) => {
-    const oldSection = state.data.sections.find(
-      (x) => x.title === section.title
-    );
-    const newSection = {
+    const oldSection = state.data.sections.find((x) => x.id === section.id);
+    const updatedSection = {
       ...oldSection,
       title: e.target.textContent,
       edited: Math.floor(Date.now()),
     };
 
     const sections = [
-      ...state.data.sections.filter((x) => x.title !== oldSection.title),
-      newSection,
+      ...state.data.sections.filter((x) => x.id !== oldSection.id),
+      updatedSection,
     ];
 
     save(sections);
   };
 
   const remove = (section) => {
-    const oldSection = state.data.sections.find(
-      (x) => x.title === section.title
-    );
+    const oldSection = state.data.sections.find((x) => x.id === section.id);
 
     const sections = [
-      ...state.data.sections.filter((x) => x.title !== oldSection.title),
+      ...state.data.sections.filter((x) => x.id !== oldSection.id),
     ];
 
     save(sections);

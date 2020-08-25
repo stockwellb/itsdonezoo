@@ -10,6 +10,16 @@ const themeComponent = (theme) => () => {
   const toaster = window.app.toaster;
   const model = new HomeModel();
 
+  const saveAction = {
+    f: () =>
+      model.dispatch({
+        allowUndo: false,
+        meta: "Undo complete",
+        action: model.actions.UNDO,
+      }),
+    title: "Undo",
+  };
+
   // Model events
   model.onDispatched((state, command) => {
     const title = command ? command.meta || "Saved!" : "Saved!";
@@ -17,17 +27,7 @@ const themeComponent = (theme) => () => {
       .then(() =>
         toaster.success(title, {
           clear: true,
-          action:
-            command.action !== model.actions.UNDO
-              ? {
-                  f: () =>
-                    model.dispatch({
-                      meta: "Undo complete",
-                      action: model.actions.UNDO,
-                    }),
-                  title: "Undo",
-                }
-              : null,
+          action: command.allowUndo ? saveAction : null,
         })
       )
       .catch((error) => {
@@ -57,12 +57,14 @@ const themeComponent = (theme) => () => {
     let command;
     if (!currentValue) {
       command = {
+        allowUndo: true,
         action: model.actions.REMOVE_SECTION,
         data: section,
         meta: "Section Removed!",
       };
     } else {
       command = {
+        allowUndo: true,
         action: model.actions.EDIT_SECTION,
         data: {
           oldSection: section,
@@ -76,6 +78,7 @@ const themeComponent = (theme) => () => {
 
   const addSection = (value) => {
     model.dispatch({
+      allowUndo: true,
       action: model.actions.ADD_SECTION,
       data: value,
       meta: "Section Added!",

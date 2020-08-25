@@ -3,7 +3,7 @@ import theme from "../theme";
 import { patch } from "../modules/vdom";
 import HomeModel from "../models/HomeModel";
 import { Content, H2, H3, P, SectionAddNew } from "../components";
-import { getHomePage, saveHomePage, getCurrentUser } from "../modules/api";
+import { getHomePage, saveHomePage } from "../modules/api";
 
 const themeComponent = (theme) => ({}, children) => {
   let subscription;
@@ -11,9 +11,7 @@ const themeComponent = (theme) => ({}, children) => {
 
   // Model events
   model.onDispatched((state) => {
-    getCurrentUser().then((user) => {
-      saveHomePage(user.uid, state);
-    });
+    saveHomePage(state);
   });
 
   model.onLoad((state) => {
@@ -24,20 +22,10 @@ const themeComponent = (theme) => ({}, children) => {
     patch(vnode, view(state));
   });
 
-  // Activate the Subscription
-  const activateSubscription = (user) => {
-    subscription = getHomePage(
-      user.uid,
-      (snapshot) => model.load(snapshot.data()),
-      (error) => console.log("error", error)
-    );
-  };
-
-  getCurrentUser().then(activateSubscription);
+  model.subscribe(getHomePage);
 
   // UI Handlers
   const editOrRemoveSection = (section) => (e) => {
-    console.log("edit section");
     const value = e.target.textContent;
     let command;
     if (!value) {
@@ -52,12 +40,10 @@ const themeComponent = (theme) => ({}, children) => {
   };
 
   const addSection = (value) => {
-    console.log("add section");
     model.dispatch({ action: model.actions.ADD_SECTION, data: value });
   };
 
   const editField = (action) => (e) => {
-    console.log("edit field");
     let value = e.target.textContent;
     model.dispatch({ action, data: value });
   };

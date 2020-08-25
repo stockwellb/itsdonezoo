@@ -11,10 +11,19 @@ function HomeModel(initialState) {
   this._state = initialState || {};
   this._onDispatchedHandler = null;
   this._onLoadHandler = null;
+  this._subscription = null;
 }
 
 HomeModel.prototype = {
   actions: actions,
+
+  subscribe: function (subscriber) {
+    this._subscription = subscriber(
+      (snapshot) => this.load(snapshot.data()),
+      (error) => console.log("error", error)
+    );
+  },
+
   load: function (state) {
     this._state = state;
     this._onLoadHandler && this._onLoadHandler(this._state);

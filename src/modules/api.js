@@ -13,39 +13,44 @@ export const signOut = () => {
   return auth().signOut();
 };
 
-export const getHomePage = async (uid, next, error) => {
-  const doc = db.collection("homes").doc(uid);
-  doc.get().then((ss) => {
-    if (ss.exists) {
-      return doc.onSnapshot(next, error);
-    } else {
-      doc
-        .set({
-          title: "Home",
-          caption: "You can keep track of all your lists right here!",
-          sections: [
-            {
-              id: generatePushID(),
-              title: "due today",
-              created: 0,
-              edited: 0,
-            },
-            {
-              id: generatePushID(),
-              title: "due this week",
-              created: 1,
-              edited: 1,
-            },
-          ],
-        })
-        .then(() => doc.onSnapshot(next, error));
-    }
+export const getHomePage = async (next, error) => {
+  return getCurrentUser().then((user) => {
+    const doc = db.collection("homes").doc(user.uid);
+
+    doc.get().then((ss) => {
+      if (ss.exists) {
+        return doc.onSnapshot(next, error);
+      } else {
+        doc
+          .set({
+            title: "Home",
+            caption: "You can keep track of all your lists right here!",
+            sections: [
+              {
+                id: generatePushID(),
+                title: "due today",
+                created: 0,
+                edited: 0,
+              },
+              {
+                id: generatePushID(),
+                title: "due this week",
+                created: 1,
+                edited: 1,
+              },
+            ],
+          })
+          .then(() => doc.onSnapshot(next, error));
+      }
+    });
+    return doc.onSnapshot(next, error);
   });
-  return doc.onSnapshot(next, error);
 };
 
-export const saveHomePage = async (uid, data) => {
-  return db.collection("homes").doc(uid).set(data);
+export const saveHomePage = async (data) => {
+  return getCurrentUser().then((user) => {
+    return db.collection("homes").doc(user.uid).set(data);
+  });
 };
 
 export const getCurrentUser = () => {

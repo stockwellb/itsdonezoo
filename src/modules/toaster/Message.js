@@ -1,6 +1,5 @@
 import Snabbdom from "snabbdom-pragma";
 import theme from "../../theme";
-import { P } from "../../components";
 
 const themeComponent = (theme) => ({ error, blank, action }, children) => {
   const id = "message";
@@ -28,6 +27,7 @@ const themeComponent = (theme) => ({ error, blank, action }, children) => {
   };
 
   const messageStyle = {
+    fontSize: theme.typography.fontSize,
     margin: "0px",
     padding: theme.spacing(2),
     textAlign: "center",
@@ -57,9 +57,9 @@ const themeComponent = (theme) => ({ error, blank, action }, children) => {
   const message = (
     <div id={id} style={rootStyle}>
       <div style={{ ...containerStyle, ...(error && errorContainerStyle) }}>
-        <P style={{ ...messageStyle, ...(error && errorMessageStyle) }}>
+        <p style={{ ...messageStyle, ...(error && errorMessageStyle) }}>
           {children}
-        </P>
+        </p>
         {action && (
           <button style={buttonStyle} on-click={action.f}>
             {action.title}

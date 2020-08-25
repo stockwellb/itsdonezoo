@@ -1,24 +1,6 @@
 import { auth, db, firestore } from "./firebase";
 import { generatePushID } from "../modules/lib";
-
-const initialHomePageData = {
-  title: "Home",
-  caption: "You can keep track of all your lists right here!",
-  sections: [
-    {
-      id: generatePushID(),
-      title: "due today",
-      created: 0,
-      edited: 0,
-    },
-    {
-      id: generatePushID(),
-      title: "due this week",
-      created: 1,
-      edited: 1,
-    },
-  ],
-};
+import HomeModel from "../models/HomeModel";
 
 export const signIn = (email, password) => {
   return auth().signInWithEmailAndPassword(email, password);
@@ -41,7 +23,9 @@ export const homePageSubscription = async (next, error) => {
       .then((ss) =>
         ss.exists
           ? doc.onSnapshot(next, error)
-          : doc.set(initialHomePageData).then(() => doc.onSnapshot(next, error))
+          : doc
+              .set(new HomeModel().getState())
+              .then(() => doc.onSnapshot(next, error))
       );
   });
 };

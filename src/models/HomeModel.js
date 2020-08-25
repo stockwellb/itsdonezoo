@@ -1,4 +1,24 @@
 import { generatePushID } from "../modules/lib";
+
+const initialData = {
+  title: "Home",
+  caption: "You can keep track of all your lists right here!",
+  sections: [
+    {
+      id: generatePushID(),
+      title: "due today",
+      created: 0,
+      edited: 0,
+    },
+    {
+      id: generatePushID(),
+      title: "due this week",
+      created: 1,
+      edited: 1,
+    },
+  ],
+};
+
 const actions = {
   EDIT_TITLE: "EDIT_TITLE",
   EDIT_CAPTION: "EDIT_CAPTION",
@@ -8,7 +28,7 @@ const actions = {
 };
 
 function HomeModel(initialState) {
-  this._state = initialState || {};
+  this._state = initialState || initialData || {};
   this._onDispatchedHandler = null;
   this._onLoadHandler = null;
   this._subscription = null;
@@ -31,6 +51,10 @@ HomeModel.prototype = {
       this._history.push(state);
     }
     this._onLoadHandler && this._onLoadHandler(this._state);
+  },
+
+  getState: function () {
+    return { ...this._state };
   },
 
   undo: function () {
@@ -72,7 +96,8 @@ HomeModel.prototype = {
         break;
       }
     }
-    this._onDispatchedHandler && this._onDispatchedHandler(this._state);
+    this._onDispatchedHandler &&
+      this._onDispatchedHandler(this._state, command || {});
   },
 
   _setState: function (state) {

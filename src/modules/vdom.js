@@ -4,6 +4,7 @@ import { classModule } from "snabbdom/build/package/modules/class";
 import { propsModule } from "snabbdom/build/package/modules/props";
 import { styleModule } from "snabbdom/build/package/modules/style";
 import { eventListenersModule } from "snabbdom/build/package/modules/eventlisteners";
+import { datasetModule } from "snabbdom/build/package/modules/dataset";
 import { attributesModule } from "snabbdom/build/package/modules/attributes";
 export { toVNode } from "snabbdom/build/package/toVNode";
 
@@ -13,6 +14,7 @@ export const patch = init([
   styleModule,
   eventListenersModule,
   attributesModule,
+  datasetModule,
 ]);
 
 export const patchComponent = (selector, Component, params = {}) => {

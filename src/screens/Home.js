@@ -9,11 +9,13 @@ import { homePageSubscription, saveHomePage } from "../modules/api";
 const themeComponent = (theme) => () => {
   let vnode;
   const model = new HomeModel();
+  console.log(HomeModel.test);
 
   // Model events
-  model.onDispatched((state) => {
+  model.onDispatched((state, command) => {
+    const title = command ? command.meta || "Saved!" : "Saved!";
     saveHomePage(state).then((x) =>
-      showMessage("Saved!", {
+      showMessage(title, {
         clear: true,
         action: { f: () => model.undo(), title: "Undo" },
       })
@@ -30,35 +32,65 @@ const themeComponent = (theme) => () => {
 
   // UI Handlers
   const editOrRemoveSection = (section) => (e) => {
-    const value = e.target.textContent;
+    const currentValue = e.target.textContent;
+    const previousValue = e.target.getAttribute("data-init");
+
+    if (previousValue === currentValue) {
+      return;
+    }
+
     let command;
-    if (!value) {
-      command = { action: model.actions.REMOVE_SECTION, data: section };
+    if (!currentValue) {
+      command = {
+        action: model.actions.REMOVE_SECTION,
+        data: section,
+        meta: "Section Removed!",
+      };
     } else {
       command = {
         action: model.actions.EDIT_SECTION,
-        data: { oldSection: section, value },
+        data: {
+          oldSection: section,
+          value: currentValue,
+        },
+        meta: "Section Saved!",
       };
     }
     model.dispatch(command);
   };
 
   const addSection = (value) => {
-    model.dispatch({ action: model.actions.ADD_SECTION, data: value });
+    model.dispatch({
+      action: model.actions.ADD_SECTION,
+      data: value,
+      meta: "Section Added!",
+    });
   };
 
   const editField = (action) => (e) => {
-    let value = e.target.textContent;
-    model.dispatch({ action, data: value });
+    const previousValue = e.target.getAttribute("data-init");
+    const currentValue = e.target.textContent;
+    if (previousValue === currentValue) {
+      return;
+    }
+    model.dispatch({ action, data: currentValue, meta: "Saved!" });
   };
 
   // View
   const view = (doc) => (
     <Content style={{ margin: theme.spacing(4) }}>
-      <H2 on-blur={editField(model.actions.EDIT_TITLE)} contentEditable="true">
+      <H2
+        data-init={doc.title}
+        on-blur={editField(model.actions.EDIT_TITLE)}
+        contentEditable="true"
+      >
         {doc.title}
       </H2>
-      <P on-blur={editField(model.actions.EDIT_CAPTION)} contentEditable="true">
+      <P
+        data-init={doc.caption}
+        on-blur={editField(model.actions.EDIT_CAPTION)}
+        contentEditable="true"
+      >
         {doc.caption}
       </P>
       <div>
@@ -75,6 +107,7 @@ const themeComponent = (theme) => () => {
                   }}
                 >
                   <H3
+                    data-init={section.title}
                     on-blur={editOrRemoveSection(section)}
                     contentEditable="true"
                   >

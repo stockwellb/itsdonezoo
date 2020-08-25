@@ -1,6 +1,6 @@
 import Snabbdom from "snabbdom-pragma";
-import theme from "../theme";
-import { P } from "../components";
+import theme from "../../theme";
+import { P } from "../../components";
 
 const themeComponent = (theme) => ({ error, blank, action }, children) => {
   const id = "message";

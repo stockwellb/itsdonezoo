@@ -14,7 +14,7 @@ import SignIn from "./screens/SignIn";
 import SignUp from "./screens/SignUp";
 import ChangePassword from "./screens/ChangePassword";
 import ForgotPassword from "./screens/ForgotPassword";
-import Toaster from "./modules/toaster";
+import { Toaster } from "./modules/toaster";
 // end routes
 
 const HOME = "/home";

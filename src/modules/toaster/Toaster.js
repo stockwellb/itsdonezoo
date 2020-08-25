@@ -1,6 +1,6 @@
 import Snabbdom from "snabbdom-pragma";
-import { patch, toVNode } from "../modules/vdom";
-import { Message } from "../components";
+import { patch, toVNode } from "../vdom";
+import Message from "./Message";
 
 const TIMEOUT_SECONDS = 3.5;
 

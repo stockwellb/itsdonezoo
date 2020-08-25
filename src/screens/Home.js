@@ -9,6 +9,7 @@ const themeComponent = (theme) => ({}, children) => {
   let subscription;
   const model = new HomeModel();
 
+  // model events
   model.onChange((state) => {
     getCurrentUser().then((user) => {
       saveHomePage(user.uid, state);
@@ -23,14 +24,7 @@ const themeComponent = (theme) => ({}, children) => {
     patch(vnode, view(state));
   });
 
-  const activateSubscription = (user) => {
-    subscription = getHomePage(
-      user.uid,
-      (snapshot) => model.load(snapshot.data()),
-      (error) => console.log("error", error)
-    );
-  };
-
+  // handlers
   const editOrRemoveSection = (section) => (e) => {
     const value = e.target.textContent;
     if (!value) {
@@ -49,6 +43,7 @@ const themeComponent = (theme) => ({}, children) => {
     model.setField(field, value);
   };
 
+  // View
   const view = (doc) => (
     <Content style={{ margin: theme.spacing(4) }}>
       <H2 on-blur={editField("title")} contentEditable="true">
@@ -84,6 +79,15 @@ const themeComponent = (theme) => ({}, children) => {
     </Content>
   );
 
+  const activateSubscription = (user) => {
+    subscription = getHomePage(
+      user.uid,
+      (snapshot) => model.load(snapshot.data()),
+      (error) => console.log("error", error)
+    );
+  };
+
+  // Activate the Subscription
   getCurrentUser().then(activateSubscription);
   return <Content style={{ margin: theme.spacing(4) }}></Content>;
 };

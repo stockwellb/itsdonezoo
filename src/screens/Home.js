@@ -9,8 +9,8 @@ const themeComponent = (theme) => ({}, children) => {
   let subscription;
   const model = new HomeModel();
 
-  // model events
-  model.onChange((state) => {
+  // Model events
+  model.onDispatched((state) => {
     getCurrentUser().then((user) => {
       saveHomePage(user.uid, state);
     });
@@ -24,32 +24,51 @@ const themeComponent = (theme) => ({}, children) => {
     patch(vnode, view(state));
   });
 
-  // handlers
+  // Activate the Subscription
+  const activateSubscription = (user) => {
+    subscription = getHomePage(
+      user.uid,
+      (snapshot) => model.load(snapshot.data()),
+      (error) => console.log("error", error)
+    );
+  };
+
+  getCurrentUser().then(activateSubscription);
+
+  // UI Handlers
   const editOrRemoveSection = (section) => (e) => {
+    console.log("edit section");
     const value = e.target.textContent;
+    let command;
     if (!value) {
-      model.removeSection(section);
+      command = { action: model.actions.REMOVE_SECTION, data: section };
     } else {
-      model.editSection(section, value);
+      command = {
+        action: model.actions.EDIT_SECTION,
+        data: { oldSection: section, value },
+      };
     }
+    model.dispatch(command);
   };
 
   const addSection = (value) => {
-    model.addSection(value);
+    console.log("add section");
+    model.dispatch({ action: model.actions.ADD_SECTION, data: value });
   };
 
-  const editField = (field) => (e) => {
+  const editField = (action) => (e) => {
+    console.log("edit field");
     let value = e.target.textContent;
-    model.setField(field, value);
+    model.dispatch({ action, data: value });
   };
 
   // View
   const view = (doc) => (
     <Content style={{ margin: theme.spacing(4) }}>
-      <H2 on-blur={editField("title")} contentEditable="true">
+      <H2 on-blur={editField(model.actions.EDIT_TITLE)} contentEditable="true">
         {doc.title}
       </H2>
-      <P on-blur={editField("caption")} contentEditable="true">
+      <P on-blur={editField(model.actions.EDIT_CAPTION)} contentEditable="true">
         {doc.caption}
       </P>
       <div>
@@ -78,17 +97,6 @@ const themeComponent = (theme) => ({}, children) => {
       </div>
     </Content>
   );
-
-  const activateSubscription = (user) => {
-    subscription = getHomePage(
-      user.uid,
-      (snapshot) => model.load(snapshot.data()),
-      (error) => console.log("error", error)
-    );
-  };
-
-  // Activate the Subscription
-  getCurrentUser().then(activateSubscription);
   return <Content style={{ margin: theme.spacing(4) }}></Content>;
 };
 

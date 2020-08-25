@@ -6,7 +6,7 @@ import { Content, H2, H3, P, SectionAddNew } from "../components";
 import { homePageSubscription, saveHomePage } from "../modules/api";
 
 const themeComponent = (theme) => () => {
-  let subscription;
+  let vnode;
   const model = new HomeModel();
 
   // Model events
@@ -15,7 +15,8 @@ const themeComponent = (theme) => () => {
   });
 
   model.onLoad((state) => {
-    const vnode = document.getElementById("content");
+    vnode = document.getElementById("content");
+    // vnode = vnode || document.getElementById("content"); //why doesn't the vdom update on section add or delete?
     patch(vnode, view(state));
   });
 

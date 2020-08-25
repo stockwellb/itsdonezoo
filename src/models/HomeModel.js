@@ -12,6 +12,7 @@ function HomeModel(initialState) {
   this._onDispatchedHandler = null;
   this._onLoadHandler = null;
   this._subscription = null;
+  this._history = [];
 }
 
 HomeModel.prototype = {
@@ -26,6 +27,9 @@ HomeModel.prototype = {
 
   load: function (state) {
     this._state = state;
+    if (this._history.length === 0) {
+      this._history.push(state);
+    }
     this._onLoadHandler && this._onLoadHandler(this._state);
   },
 
@@ -64,6 +68,15 @@ HomeModel.prototype = {
     this._onDispatchedHandler && this._onDispatchedHandler(this._state);
   },
 
+  _setState: function (state) {
+    this._state = state;
+    this._history.push(state);
+    if (this._history.length >= 3) {
+      this._history.shift();
+    }
+    console.log(this._history);
+  },
+
   _setField: function (field, value) {
     if (!value) {
       if (field === "title") {
@@ -79,7 +92,7 @@ HomeModel.prototype = {
       [field]: value,
       edited: Math.floor(Date.now()),
     };
-    this._state = newState;
+    this._setState(newState);
   },
 
   _addSection: function (value) {
@@ -132,7 +145,7 @@ HomeModel.prototype = {
       edited: Math.floor(Date.now()),
       sections: sections,
     };
-    this._state = newState;
+    this._setState(newState);
   },
 };
 

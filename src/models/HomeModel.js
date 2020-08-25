@@ -20,8 +20,13 @@ HomeModel.prototype = {
         value = "Add some lists here!";
       }
     }
-    this._state[field] = value;
-    this._state.edited = Math.floor(Date.now());
+
+    const newState = {
+      ...this._state,
+      [field]: value,
+      edited: Math.floor(Date.now()),
+    };
+    this._state = newState;
     this._onChangeHandler && this._onChangeHandler(this._state);
   },
   onChange: function (handler) {
@@ -78,8 +83,10 @@ HomeModel.prototype = {
   },
 
   _saveSections: function (sections) {
-    this._state.edited = Math.floor(Date.now());
-    this._state.sections = sections;
+    const newState = { ...this._state };
+    newState.edited = Math.floor(Date.now());
+    newState.sections = sections;
+    this._state = newState;
     this._onChangeHandler && this._onChangeHandler(this._state);
   },
 };

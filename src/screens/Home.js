@@ -91,7 +91,12 @@ const themeComponent = (theme) => () => {
     if (previousValue === currentValue) {
       return;
     }
-    model.dispatch({ action, data: currentValue, meta: "Saved!" });
+    model.dispatch({
+      allowUndo: true,
+      action,
+      data: currentValue,
+      meta: "Saved!",
+    });
   };
 
   // View

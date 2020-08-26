@@ -44,7 +44,6 @@ BaseModel.prototype = {
     if (this._history.length > 25) {
       this._history = this._history.slice(-25);
     }
-    console.log(this._history);
   },
 };
 

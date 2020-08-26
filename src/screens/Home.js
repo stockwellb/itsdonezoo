@@ -2,7 +2,7 @@ import Snabbdom from "snabbdom-pragma";
 import theme from "../theme";
 import { patch } from "../modules/vdom";
 import HomeModel from "../models/HomeModel";
-import { Content, H2, H3, P, SectionAddNew } from "../components";
+import { Content, H2, H3, P, SectionAddNew, Spinner } from "../components";
 import { homePageSubscription, saveHomePage } from "../modules/api";
 
 const themeComponent = (theme) => () => {
@@ -150,7 +150,13 @@ const themeComponent = (theme) => () => {
       </div>
     </Content>
   );
-  return <Content style={{ margin: theme.spacing(4) }}></Content>;
+  return (
+    <Content style={{ margin: theme.spacing(4) }}>
+      <Spinner>
+        <p>Loading</p>
+      </Spinner>
+    </Content>
+  );
 };
 
 export default (() => themeComponent(theme))();

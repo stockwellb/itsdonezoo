@@ -9,7 +9,6 @@ const themeComponent = (theme) => () => {
   let vnode;
   const toaster = window.app.toaster;
   const model = new HomeModel();
-  console.log("model", model);
 
   const saveAction = {
     f: () =>

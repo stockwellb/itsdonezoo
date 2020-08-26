@@ -77,6 +77,9 @@ const themeComponent = (theme) => () => {
   };
 
   const addSection = (value) => {
+    if (!value) {
+      return;
+    }
     model.dispatch({
       allowUndo: true,
       action: model.actions.ADD_SECTION,

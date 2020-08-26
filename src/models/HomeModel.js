@@ -1,4 +1,5 @@
 import { generatePushID } from "../modules/lib";
+import BaseModel from "./BaseModel";
 
 export const initialData = {
   title: "Home",
@@ -29,155 +30,110 @@ const actions = {
 };
 
 function HomeModel(initialState) {
-  this._state = initialState || {};
-  this._onDispatchedHandler = null;
-  this._onLoadHandler = null;
-  this._subscription = null;
-  this._history = [];
+  BaseModel.call(this, initialState || initialData);
 }
 
-HomeModel.prototype = {
-  actions: actions,
+HomeModel.prototype = Object.create(BaseModel.prototype);
 
-  subscribe: function (subscriber) {
-    this._subscription = subscriber(
-      (snapshot) => this.load(snapshot.data()),
-      (error) => console.log("error", error)
-    );
-  },
+HomeModel.prototype.actions = actions;
 
-  load: function (state) {
-    this._state = state;
-    if (this._history.length === 0) {
-      this._history.push(state);
+HomeModel.prototype.dispatch = function (command) {
+  console.log("command", command);
+  switch (command.action) {
+    case actions.EDIT_TITLE: {
+      this._setField("title", command.data);
+      break;
     }
-    this._onLoadHandler && this._onLoadHandler(this._state);
-  },
-
-  getState: function () {
-    return { ...this._state };
-  },
-
-  onDispatched: function (handler) {
-    this._onDispatchedHandler = handler;
-  },
-
-  onLoad: function (handler) {
-    this._onLoadHandler = handler;
-  },
-
-  dispatch: function (command) {
-    console.log("command", command);
-    switch (command.action) {
-      case actions.EDIT_TITLE: {
-        this._setField("title", command.data);
-        break;
-      }
-      case actions.EDIT_CAPTION: {
-        this._setField("caption", command.data);
-        break;
-      }
-      case actions.ADD_SECTION: {
-        this._addSection(command.data);
-        break;
-      }
-      case actions.REMOVE_SECTION: {
-        this._removeSection(command.data);
-        break;
-      }
-      case actions.EDIT_SECTION: {
-        this._editSection(command.data);
-        break;
-      }
-      case actions.UNDO: {
-        this._undo();
-        break;
-      }
+    case actions.EDIT_CAPTION: {
+      this._setField("caption", command.data);
+      break;
     }
-    this._onDispatchedHandler &&
-      this._onDispatchedHandler(this._state, command || {});
-  },
-
-  _undo: function () {
-    const previous = this._history.slice(-2).reverse().pop();
-    this._setState(previous);
-  },
-
-  _setState: function (state) {
-    this._state = state;
-    this._history.push(state);
-    if (this._history.length > 25) {
-      this._history = this._history.slice(-25);
+    case actions.ADD_SECTION: {
+      this._addSection(command.data);
+      break;
     }
-    console.log(this._history);
-  },
-
-  _setField: function (field, value) {
-    if (!value) {
-      if (field === "title") {
-        value = "Home";
-      }
-      if (field === "caption") {
-        value = "Add some lists here!";
-      }
+    case actions.REMOVE_SECTION: {
+      this._removeSection(command.data);
+      break;
     }
-
-    const newState = {
-      ...this._state,
-      [field]: value,
-      edited: Math.floor(Date.now()),
-    };
-    this._setState(newState);
-  },
-
-  _addSection: function (value) {
-    if (!this._state.sections) {
-      this._state.sections = [];
+    case actions.EDIT_SECTION: {
+      this._editSection(command.data);
+      break;
     }
-
-    const newSection = {
-      id: generatePushID(),
-      title: value,
-      edited: Math.floor(Date.now()),
-      created: Math.floor(Date.now()),
-    };
-
-    const sections = [...this._state.sections, newSection];
-
-    this._saveSections(sections);
-  },
-
-  _removeSection: function (section) {
-    const sections = [
-      ...this._state.sections.filter((x) => x.id !== section.id),
-    ];
-
-    this._saveSections(sections);
-  },
-
-  _editSection: function ({ oldSection, value }) {
-    oldSection = this._state.sections.find((x) => x.id === oldSection.id);
-    const updatedSection = {
-      ...oldSection,
-      title: value,
-      edited: Math.floor(Date.now()),
-    };
-
-    const sections = [
-      ...this._state.sections.filter((x) => x.id !== oldSection.id),
-      updatedSection,
-    ];
-    this._saveSections(sections);
-  },
-
-  _saveSections: function (sections) {
-    const newState = {
-      ...this._state,
-      edited: Math.floor(Date.now()),
-      sections: sections,
-    };
-    this._setState(newState);
-  },
+    case actions.UNDO: {
+      this.undo();
+      break;
+    }
+  }
+  this.onDispatchedHandler &&
+    this.onDispatchedHandler(this.state, command || {});
 };
+
+HomeModel.prototype._setField = function (field, value) {
+  if (!value) {
+    if (field === "title") {
+      value = "Home";
+    }
+    if (field === "caption") {
+      value = "Add some lists here!";
+    }
+  }
+
+  const newState = {
+    ...this.state,
+    [field]: value,
+    edited: Math.floor(Date.now()),
+  };
+  this._setState(newState);
+};
+
+HomeModel.prototype._addSection = function (value) {
+  if (!this.state.sections) {
+    this.state.sections = [];
+  }
+
+  const newSection = {
+    id: generatePushID(),
+    title: value,
+    edited: Math.floor(Date.now()),
+    created: Math.floor(Date.now()),
+  };
+
+  const sections = [...this.state.sections, newSection];
+
+  this._saveSections(sections);
+};
+
+HomeModel.prototype._removeSection = function (section) {
+  const sections = [...this.state.sections.filter((x) => x.id !== section.id)];
+
+  this._saveSections(sections);
+};
+
+HomeModel.prototype._editSection = function ({ oldSection, value }) {
+  oldSection = this.state.sections.find((x) => x.id === oldSection.id);
+  const updatedSection = {
+    ...oldSection,
+    title: value,
+    edited: Math.floor(Date.now()),
+  };
+
+  const sections = [
+    ...this.state.sections.filter((x) => x.id !== oldSection.id),
+    updatedSection,
+  ];
+  this._saveSections(sections);
+};
+
+HomeModel.prototype._saveSections = function (sections) {
+  const newState = {
+    ...this.state,
+    edited: Math.floor(Date.now()),
+    sections: sections,
+  };
+  this.setState(newState);
+};
+
+HomeModel.prototype.constructor = HomeModel;
 
 export default HomeModel;

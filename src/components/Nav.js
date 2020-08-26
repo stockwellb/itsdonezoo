@@ -21,6 +21,10 @@ const navStyle = {
   borderTop: `3px solid ${theme.palette.primary.contrastText}`,
 };
 
+export const NavStub = () => {
+  return <nav id="nav"></nav>;
+};
+
 const themeComponent = (theme) => ({}, children) => (
   <nav id="nav" style={navStyle}>
     <ul

@@ -152,9 +152,7 @@ const themeComponent = (theme) => () => {
   );
   return (
     <Content style={{ margin: theme.spacing(4) }}>
-      <Spinner>
-        <p>Loading</p>
-      </Spinner>
+      <Spinner caption="Just a sec" />
     </Content>
   );
 };

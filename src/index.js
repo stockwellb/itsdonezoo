@@ -15,6 +15,7 @@ import SignUp from "./screens/SignUp";
 import ChangePassword from "./screens/ChangePassword";
 import ForgotPassword from "./screens/ForgotPassword";
 import { Toaster } from "./modules/toaster";
+import { NavStub } from "./components/Nav";
 // end routes
 
 const HOME = "/home";
@@ -64,7 +65,6 @@ router.onAuthFailed(isAuth(STORAGE_LOCATION), (params) =>
 
 // route auth state changes
 auth().onAuthStateChanged((user) => {
-  const NavStub = () => <div id={NAV_LOCATOR}></div>;
   console.log(`auth state changed: logged ${!!user ? "in" : "out"}`);
   if (user) {
     localStorage.setItem(STORAGE_LOCATION, "1");

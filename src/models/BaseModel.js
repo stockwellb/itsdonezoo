@@ -1,9 +1,9 @@
 function BaseModel(initialState) {
-  this.state = initialState || {};
-  this.onDispatchedHandler = null;
-  this.onLoadHandler = null;
-  this.subscription = null;
-  this.history = [];
+  this._state = initialState || {};
+  this._onDispatchedHandler = null;
+  this._onLoadHandler = null;
+  this._subscription = null;
+  this._history = [];
 }
 
 BaseModel.prototype = {
@@ -15,36 +15,36 @@ BaseModel.prototype = {
   },
 
   load: function (state) {
-    this.state = state;
-    if (this.history.length === 0) {
-      this.history.push(state);
+    this._state = state;
+    if (this._history.length === 0) {
+      this._history.push(state);
     }
-    this.onLoadHandler && this.onLoadHandler(this.state);
+    this._onLoadHandler && this._onLoadHandler(this._state);
   },
 
   getState: function () {
-    return { ...this.state };
+    return { ...this._state };
   },
 
   onDispatched: function (handler) {
-    this.onDispatchedHandler = handler;
+    this._onDispatchedHandler = handler;
   },
 
   onLoad: function (handler) {
-    this.onLoadHandler = handler;
+    this._onLoadHandler = handler;
   },
-  undo: function () {
-    const previous = this.history.slice(-2).reverse().pop();
-    this.setState(previous);
+  _undo: function () {
+    const previous = this._history.slice(-2).reverse().pop();
+    this._setState(previous);
   },
 
-  setState: function (state) {
-    this.state = state;
-    this.history.push(state);
-    if (this.history.length > 25) {
-      this.history = this.history.slice(-25);
+  _setState: function (state) {
+    this._state = state;
+    this._history.push(state);
+    if (this._history.length > 25) {
+      this._history = this._history.slice(-25);
     }
-    console.log(this.history);
+    console.log(this._history);
   },
 };
 

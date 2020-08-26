@@ -61,12 +61,12 @@ HomeModel.prototype.dispatch = function (command) {
       break;
     }
     case actions.UNDO: {
-      this.undo();
+      this._undo();
       break;
     }
   }
-  this.onDispatchedHandler &&
-    this.onDispatchedHandler(this.state, command || {});
+  this._onDispatchedHandler &&
+    this._onDispatchedHandler(this._state, command || {});
 };
 
 HomeModel.prototype._setField = function (field, value) {
@@ -80,7 +80,7 @@ HomeModel.prototype._setField = function (field, value) {
   }
 
   const newState = {
-    ...this.state,
+    ...this._state,
     [field]: value,
     edited: Math.floor(Date.now()),
   };
@@ -88,8 +88,8 @@ HomeModel.prototype._setField = function (field, value) {
 };
 
 HomeModel.prototype._addSection = function (value) {
-  if (!this.state.sections) {
-    this.state.sections = [];
+  if (!this._state.sections) {
+    this._state.sections = [];
   }
 
   const newSection = {
@@ -99,19 +99,19 @@ HomeModel.prototype._addSection = function (value) {
     created: Math.floor(Date.now()),
   };
 
-  const sections = [...this.state.sections, newSection];
+  const sections = [...this._state.sections, newSection];
 
   this._saveSections(sections);
 };
 
 HomeModel.prototype._removeSection = function (section) {
-  const sections = [...this.state.sections.filter((x) => x.id !== section.id)];
+  const sections = [...this._state.sections.filter((x) => x.id !== section.id)];
 
   this._saveSections(sections);
 };
 
 HomeModel.prototype._editSection = function ({ oldSection, value }) {
-  oldSection = this.state.sections.find((x) => x.id === oldSection.id);
+  oldSection = this._state.sections.find((x) => x.id === oldSection.id);
   const updatedSection = {
     ...oldSection,
     title: value,
@@ -119,7 +119,7 @@ HomeModel.prototype._editSection = function ({ oldSection, value }) {
   };
 
   const sections = [
-    ...this.state.sections.filter((x) => x.id !== oldSection.id),
+    ...this._state.sections.filter((x) => x.id !== oldSection.id),
     updatedSection,
   ];
   this._saveSections(sections);
@@ -127,11 +127,11 @@ HomeModel.prototype._editSection = function ({ oldSection, value }) {
 
 HomeModel.prototype._saveSections = function (sections) {
   const newState = {
-    ...this.state,
+    ...this._state,
     edited: Math.floor(Date.now()),
     sections: sections,
   };
-  this.setState(newState);
+  this._setState(newState);
 };
 
 HomeModel.prototype.constructor = HomeModel;

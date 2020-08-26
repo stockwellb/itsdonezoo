@@ -96,7 +96,14 @@ const themeComponent = (theme) => () => {
 
   // View
   const view = (doc) => (
-    <Content style={{ margin: theme.spacing(4) }}>
+    <Content
+      style={{ margin: theme.spacing(4) }}
+      hooks={{
+        remove: () => console.log("remove"),
+        destroy: () => console.log("destroy"),
+        init: () => console.log("init"),
+      }}
+    >
       <H2
         data-init={doc.title}
         on-blur={editField(model.actions.EDIT_TITLE)}
